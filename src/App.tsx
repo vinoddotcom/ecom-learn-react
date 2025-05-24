@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import SignIn from "./components/auth/signIn";
 import SignUp from "./components/auth/signUp";
@@ -8,7 +8,7 @@ import { getUserProfile } from "./store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 
 // Protected Route component
-const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
+const ProtectedRoute = ({ children }: { children: React.ReactElement }) => {
   const { isAuthenticated, loading } = useAppSelector(state => state.auth);
 
   if (loading) return <div>Loading...</div>;

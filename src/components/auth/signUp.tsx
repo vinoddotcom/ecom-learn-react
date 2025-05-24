@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from "react";
+import { useState, type FormEvent, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { register, clearError } from "../../store/slices/authSlice";
