@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor, act } from "@testing-library/react";
 import { useFetch } from "../../hooks/useFetch";
 import axios from "axios";
 
@@ -17,15 +17,19 @@ describe("useFetch", () => {
     vi.clearAllMocks();
   });
 
-  it("should return initial loading state", () => {
+  it("should return initial loading state", async () => {
     const fetchFn = vi.fn().mockResolvedValue({ data: "test" });
 
     const { result } = renderHook(() => useFetch(fetchFn));
 
+    // Check initial state
     expect(result.current.loading).toBe(true);
     expect(result.current.data).toBe(null);
     expect(result.current.error).toBe(null);
     expect(typeof result.current.refetch).toBe("function");
+
+    // Wait for any pending state updates to complete
+    await waitFor(() => expect(result.current.loading).toBe(false));
   });
 
   it("should update state with fetched data when successful", async () => {
@@ -97,12 +101,14 @@ describe("useFetch", () => {
     fetchFn.mockClear();
 
     // Call refetch inside act wrapper
-    await result.current.refetch();
+    act(() => {
+      void result.current.refetch();
+    });
 
     // Wait for refetch to complete
     await waitFor(() => {
-      // Verify fetchFn was called again
       expect(fetchFn).toHaveBeenCalledTimes(1);
+      expect(result.current.data).toEqual(testData);
     });
   });
 
