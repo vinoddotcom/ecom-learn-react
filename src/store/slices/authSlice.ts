@@ -13,8 +13,8 @@ interface AuthState {
 // Initial state
 const initialState: AuthState = {
   user: null,
-  token: localStorage.getItem("token"),
-  isAuthenticated: Boolean(localStorage.getItem("token")),
+  token: null, // API handles token via cookies
+  isAuthenticated: false,
   loading: false,
   error: null,
 };
@@ -52,7 +52,7 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
-  localStorage.removeItem("token");
+  // No need to manually remove token - handled by API via cookies
   return null;
 });
 
@@ -63,9 +63,11 @@ export const getUserProfile = createAsyncThunk(
       const response = await AuthService.getMyProfile();
       return response; // Removed .data
     } catch (error: unknown) {
-      if (error && typeof error === 'object' && 'response' in error) {
+      if (error && typeof error === "object" && "response" in error) {
         const axiosError = error as { response?: { data?: { message?: string } } };
-        return rejectWithValue(axiosError.response?.data?.message || "Failed to fetch user profile");
+        return rejectWithValue(
+          axiosError.response?.data?.message || "Failed to fetch user profile"
+        );
       }
       if (error instanceof Error) {
         return rejectWithValue(error.message || "Failed to fetch user profile");
@@ -95,10 +97,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user || null;
         state.token = action.payload.token || null;
-        state.isAuthenticated = Boolean(action.payload.token);
-        if (action.payload.token) {
-          localStorage.setItem("token", action.payload.token);
-        }
+        state.isAuthenticated = Boolean(action.payload.success);
+        // API handles cookie-based authentication, no need to store token
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
@@ -116,10 +116,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user || null;
         state.token = action.payload.token || null;
-        state.isAuthenticated = Boolean(action.payload.token);
-        if (action.payload.token) {
-          localStorage.setItem("token", action.payload.token);
-        }
+        state.isAuthenticated = Boolean(action.payload.success);
+        // API handles cookie-based authentication, no need to store token
       })
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
@@ -162,7 +160,7 @@ const authSlice = createSlice({
         state.error = action.payload as string;
         state.user = null;
         state.isAuthenticated = false;
-        localStorage.removeItem("token");
+        // No need to manually remove token - handled by API via cookies
       });
   },
 });

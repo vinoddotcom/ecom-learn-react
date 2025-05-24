@@ -11,18 +11,14 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
     Accept: "application/json",
   },
+  withCredentials: true, // Important: Enables sending cookies with requests
 });
 
 // Request interceptor
 axiosInstance.interceptors.request.use(
   config => {
-    // Get token from localStorage if it exists
-    const token = localStorage.getItem("authToken");
-
-    // If token exists, add it to authorization header
-    if (token && config.headers) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
+    // No need to manually set auth headers - cookies are automatically sent with requests
+    // The server will handle authentication via cookies
 
     return config;
   },
@@ -44,8 +40,8 @@ axiosInstance.interceptors.response.use(
       const status = error.response.status;
 
       if (status === 401) {
-        // Unauthorized - token expired or invalid
-        localStorage.removeItem("authToken");
+        // Unauthorized - session expired or invalid
+        // The server handles removing cookies
         // Optional: Redirect to login page
         // window.location.href = '/login';
       }

@@ -23,7 +23,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ["**/*.test.tsx", "**/*.spec.ts", "**/__tests__/**/*.ts", "./tests/**"],
+    files: ["**/*.test.tsx", "**/*.test.ts", "**/*.spec.ts", "**/__tests__/**/*.ts", "./tests/**"],
     rules: {
       "@typescript-eslint/no-explicit-any": "off", // <-- only applies to test files
     },

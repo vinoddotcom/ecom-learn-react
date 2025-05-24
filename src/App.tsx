@@ -4,6 +4,8 @@ import SignIn from "./components/auth/signIn";
 import SignUp from "./components/auth/signUp";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
+import AdminProductList from "./components/admin/AdminProductList";
+import AdminRoute from "./components/routes/AdminRoute";
 import { getUserProfile } from "./store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 
@@ -22,14 +24,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactElement }) => {
 
 function App() {
   const dispatch = useAppDispatch();
-  const { token } = useAppSelector(state => state.auth);
 
   useEffect(() => {
-    // If we have a token, try to get the user profile when the app loads
-    if (token) {
-      dispatch(getUserProfile());
-    }
-  }, [dispatch, token]);
+    // Restore authentication on page refresh by checking for existing session
+    dispatch(getUserProfile());
+  }, [dispatch]); // Only runs once on mount
 
   return (
     <BrowserRouter>
@@ -57,6 +56,16 @@ function App() {
                 <ProtectedRoute>
                   <div className="mt-5 text-center">Orders Page (Protected)</div>
                 </ProtectedRoute>
+              }
+            />
+
+            {/* Admin routes */}
+            <Route
+              path="/admin/products"
+              element={
+                <AdminRoute>
+                  <AdminProductList />
+                </AdminRoute>
               }
             />
 

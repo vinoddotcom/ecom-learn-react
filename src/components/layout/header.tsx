@@ -479,7 +479,8 @@ export default function Header() {
                           </Link>
                           {user?.role === "admin" && (
                             <Link
-                              to="/admin/dashboard"
+                              // to="/admin/dashboard"
+                              to="/admin/products"
                               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               Admin Dashboard
