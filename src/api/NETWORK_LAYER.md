@@ -52,10 +52,3 @@ const { data, loading, error, refetch } = useFetch(() => ProductService.getProdu
 const products = data?.products || [];
 ```
 
-## Testing Without a Backend
-
-To test the UI without a working backend:
-
-1. Set `VITE_USE_MOCK_API=true` in your `.env` file
-2. The app will use mock data from `mockServer.ts`
-3. You can customize the mock data in that file for testing different scenarios

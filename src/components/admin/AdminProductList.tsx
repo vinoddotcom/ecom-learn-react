@@ -8,6 +8,7 @@ const AdminProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [deletingProducts, setDeletingProducts] = useState<Set<string>>(new Set());
   const { user } = useAppSelector(state => state.auth);
 
   useEffect(() => {
@@ -29,11 +30,21 @@ const AdminProductList: React.FC = () => {
   const handleDelete = async (id: string) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
+        // Set product as deleting
+        setDeletingProducts(prev => new Set(prev).add(id));
+
         await ProductService.deleteProduct(id);
         // Update the products list after deletion
         setProducts(products.filter(product => product._id !== id));
       } catch {
         setError("Failed to delete product");
+      } finally {
+        // Remove product from the deleting set
+        setDeletingProducts(prev => {
+          const newSet = new Set(prev);
+          newSet.delete(id);
+          return newSet;
+        });
       }
     }
   };
@@ -134,7 +145,7 @@ const AdminProductList: React.FC = () => {
                   ${product.price.toFixed(2)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {product.stock}
+                  {product.Stock}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {product.category}
@@ -151,8 +162,32 @@ const AdminProductList: React.FC = () => {
                       onClick={() => product._id && handleDelete(product._id)}
                       className="text-red-600 hover:text-red-900"
                       aria-label="Delete product"
+                      disabled={product._id ? deletingProducts.has(product._id) : false}
                     >
-                      <TrashIcon className="h-5 w-5" />
+                      {product._id && deletingProducts.has(product._id) ? (
+                        <svg
+                          className="animate-spin h-5 w-5 text-red-600"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4zm16 0a8 8 0 01-8 8v-4a4 4 0 004-4h4z"
+                          />
+                        </svg>
+                      ) : (
+                        <TrashIcon className="h-5 w-5" />
+                      )}
                     </button>
                   </div>
                 </td>

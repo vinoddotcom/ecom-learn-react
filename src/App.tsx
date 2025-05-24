@@ -5,6 +5,7 @@ import SignUp from "./components/auth/signUp";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import AdminProductList from "./components/admin/AdminProductList";
+import AdminProductForm from "./components/admin/AdminProductForm";
 import AdminRoute from "./components/routes/AdminRoute";
 import { getUserProfile } from "./store/slices/authSlice";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
@@ -65,6 +66,22 @@ function App() {
               element={
                 <AdminRoute>
                   <AdminProductList />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/products/new"
+              element={
+                <AdminRoute>
+                  <AdminProductForm />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/products/edit/:id"
+              element={
+                <AdminRoute>
+                  <AdminProductForm />
                 </AdminRoute>
               }
             />

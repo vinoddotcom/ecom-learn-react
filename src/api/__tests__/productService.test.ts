@@ -87,7 +87,7 @@ describe("ProductService", () => {
 
       const result = await ProductService.getProductById(productId);
 
-      expect(apiHelper.get).toHaveBeenCalledWith(`/products/${productId}`);
+      expect(apiHelper.get).toHaveBeenCalledWith(`/product/${productId}`);
       expect(result).toEqual(mockResponse);
     });
   });
@@ -104,7 +104,7 @@ describe("ProductService", () => {
 
       const result = await ProductService.createProduct(formData);
 
-      expect(apiHelper.post).toHaveBeenCalledWith("/products", formData, {
+      expect(apiHelper.post).toHaveBeenCalledWith("/admin/product/new", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -126,7 +126,7 @@ describe("ProductService", () => {
 
       const result = await ProductService.updateProduct(productId, formData);
 
-      expect(apiHelper.put).toHaveBeenCalledWith(`/products/${productId}`, formData, {
+      expect(apiHelper.put).toHaveBeenCalledWith(`/admin/product/${productId}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -146,7 +146,7 @@ describe("ProductService", () => {
 
       const result = await ProductService.deleteProduct(productId);
 
-      expect(apiHelper.delete).toHaveBeenCalledWith(`/products/${productId}`);
+      expect(apiHelper.delete).toHaveBeenCalledWith(`/admin/product/${productId}`);
       expect(result).toEqual(mockResponse);
     });
   });

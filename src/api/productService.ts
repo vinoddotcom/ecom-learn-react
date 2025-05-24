@@ -11,7 +11,7 @@ export interface Product {
     url: string;
   }[];
   category: string;
-  stock: number;
+  Stock: number;
   numOfReviews?: number;
   reviews?: {
     name: string;
@@ -79,13 +79,13 @@ const ProductService = {
   /**
    * Get product by ID
    */
-  getProductById: (productId: string) => apiHelper.get<ProductResponse>(`/products/${productId}`),
+  getProductById: (productId: string) => apiHelper.get<ProductResponse>(`/product/${productId}`),
 
   /**
    * Create new product (admin only)
    */
   createProduct: (productData: FormData) =>
-    apiHelper.post<ProductResponse>("/products", productData, {
+    apiHelper.post<ProductResponse>("/admin/product/new", productData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -95,7 +95,7 @@ const ProductService = {
    * Update product (admin only)
    */
   updateProduct: (productId: string, productData: FormData) =>
-    apiHelper.put<ProductResponse>(`/products/${productId}`, productData, {
+    apiHelper.put<ProductResponse>(`/admin/product/${productId}`, productData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -104,7 +104,7 @@ const ProductService = {
   /**
    * Delete product (admin only)
    */
-  deleteProduct: (productId: string) => apiHelper.delete<ProductResponse>(`/products/${productId}`),
+  deleteProduct: (productId: string) => apiHelper.delete<ProductResponse>(`/admin/product/${productId}`),
 
   /**
    * Create or update review
