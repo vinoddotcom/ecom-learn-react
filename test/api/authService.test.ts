@@ -2,6 +2,10 @@ import { describe, it, expect, beforeEach } from "vitest";
 import AuthService from "../../src/api/authService";
 import { server } from "../../src/test/setup";
 import { http, HttpResponse } from "msw";
+import axios from "axios";
+
+// Helper function when tests need to explicitly fail
+const fail = (message: string) => expect(message).toBeFalsy();
 
 describe("AuthService", () => {
   beforeEach(() => {
@@ -17,13 +21,17 @@ describe("AuthService", () => {
       expect(response.success).toBe(true);
       expect(response.token).toBeDefined();
       expect(response.user).toBeDefined();
-      expect(response.user.email).toBe("test@example.com");
+      if (response.user) {
+        expect(response.user.email).toBe("test@example.com");
+      } else {
+        fail("User data should be defined");
+      }
     });
 
     it("should handle login error", async () => {
       // Override the default handler for this specific test
       server.use(
-        http.post("*/auth/login", () => {
+        http.post("*/login", () => {
           return new HttpResponse(
             JSON.stringify({
               success: false,
@@ -37,10 +45,16 @@ describe("AuthService", () => {
       try {
         await AuthService.login("wrong@example.com", "wrongpass");
         // If we reach here, the request didn't fail as expected
-        expect(true).toBe(false); // This will always fail if exception isn't thrown
-      } catch (error: any) {
-        expect(error.response.status).toBe(401);
-        expect(error.response.data.success).toBe(false);
+        fail("Expected login to fail with 401 error");
+      } catch (error: unknown) {
+        // Different error handling approach for Axios errors
+        if (axios.isAxiosError(error) && error.response) {
+          expect(error.response.status).toBe(401);
+          expect(error.response.data.success).toBe(false);
+        } else {
+          // If we get here without a response, fail the test
+          fail("Expected Axios error with response");
+        }
       }
     });
   });
@@ -75,7 +89,11 @@ describe("AuthService", () => {
 
       expect(response.success).toBe(true);
       expect(response.user).toBeDefined();
-      expect(response.user.name).toBe("Test User");
+      if (response.user) {
+        expect(response.user.name).toBe("Test User");
+      } else {
+        fail("User data should be defined");
+      }
     });
   });
 

@@ -47,7 +47,7 @@ describe("SignUp Component", () => {
     store = configureStore({
       reducer: {
         auth: authReducer,
-      },
+      } as const,
       preloadedState: {
         auth: { ...authState },
       },
@@ -73,7 +73,7 @@ describe("SignUp Component", () => {
 
       // Also update the Redux store for completeness
       store = configureStore({
-        reducer: { auth: authReducer },
+        reducer: { auth: authReducer } as any,
         preloadedState,
       });
     }
@@ -198,7 +198,7 @@ describe("SignUp Component", () => {
     // Mock FileReader and its methods
     const mockFileReader = {
       readAsDataURL: vi.fn(),
-      onload: null,
+      onload: null as any,
       readyState: 2,
       result: "data:image/jpeg;base64,fake-base64-data",
     };
@@ -221,8 +221,10 @@ describe("SignUp Component", () => {
     }
 
     // Simulate FileReader completion
+    // The component should have set the onload handler by now
     if (mockFileReader.onload) {
-      mockFileReader.onload({ target: mockFileReader } as any);
+      // Trigger the onload event handler
+      mockFileReader.onload.call(null, { target: mockFileReader });
     }
 
     // Check that readAsDataURL was called

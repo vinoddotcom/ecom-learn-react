@@ -4,7 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import Header from "../../../src/components/layout/header";
-import authReducer, { logout } from "../../../src/store/slices/authSlice";
+import authReducer from "../../../src/store/slices/authSlice";
 
 // Mock useDispatch and useNavigate
 const mockDispatch = vi.fn();
@@ -12,7 +12,7 @@ const mockNavigate = vi.fn();
 const mockUseSelector = vi.fn();
 
 // Mock Provider component
-const MockProvider = ({ children, store }: any) => <>{children}</>;
+// const MockProvider = ({ children, store }: any) => <>{children}</>;
 
 vi.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
@@ -79,6 +79,7 @@ vi.mock("@headlessui/react", () => {
 });
 
 describe("Header Component", () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let store: ReturnType<typeof configureStore>;
   let authState = {
     user: null,
@@ -118,7 +119,7 @@ describe("Header Component", () => {
 
       // Also update the Redux store for completeness
       store = configureStore({
-        reducer: { auth: authReducer },
+        reducer: { auth: authReducer } as any,
         preloadedState,
       });
     }

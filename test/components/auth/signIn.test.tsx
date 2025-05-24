@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { configureStore } from "@reduxjs/toolkit";
 import { MemoryRouter } from "react-router-dom";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import authReducer, { login } from "../../../src/store/slices/authSlice";
+import authReducer from "../../../src/store/slices/authSlice";
 import SignIn from "../../../src/components/auth/signIn";
 import { Provider } from "react-redux";
 
@@ -13,7 +13,7 @@ const mockNavigate = vi.fn();
 const mockUseSelector = vi.fn();
 
 // Create a mock Provider component
-const MockProvider = ({ children, store }: any) => <>{children}</>;
+const MockProvider = ({ children }: any) => <>{children}</>;
 
 vi.mock("react-redux", () => ({
   useDispatch: () => mockDispatch,
@@ -75,7 +75,7 @@ describe("SignIn Component", () => {
 
       // Also update the Redux store for completeness
       store = configureStore({
-        reducer: { auth: authReducer },
+        reducer: { auth: authReducer } as any,
         preloadedState,
       });
     }
@@ -140,14 +140,6 @@ describe("SignIn Component", () => {
 
     // Verify login was dispatched with correct credentials
     expect(mockDispatch).toHaveBeenCalledTimes(1);
-
-    // We need to check that the dispatched argument is a function (thunk)
-    // The actual action is not directly accessible in the mock calls
-    // Instead, check that the function was called and the form values match
-    const formData = {
-      email: "test@example.com",
-      password: "password123",
-    };
 
     // Look for login action being dispatched with our credentials
     const wasCalled = mockDispatch.mock.calls.some(call => {

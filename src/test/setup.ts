@@ -62,47 +62,47 @@ export const handlers = [
   }),
 
   // Auth endpoints
-  http.post("*/auth/login", () => {
+  http.post("*/login", () => {
     return HttpResponse.json(mockAuthResponses.login);
   }),
-  http.post("*/auth/register", () => {
+  http.post("*/register", () => {
     return HttpResponse.json(mockAuthResponses.register);
   }),
-  http.get("*/auth/me", () => {
+  http.get("*/me", () => {
     return HttpResponse.json(mockAuthResponses.profile);
   }),
-  http.get("*/auth/logout", () => {
+  http.get("*/logout", () => {
     return HttpResponse.json(mockAuthResponses.logout);
   }),
-  http.put("*/auth/password/update", () => {
+  http.put("*/password/update", () => {
     return HttpResponse.json({ success: true });
   }),
-  http.put("*/auth/me/update", () => {
+  http.put("*/me/update", () => {
     return HttpResponse.json({ success: true });
   }),
-  http.post("*/auth/password/forgot", () => {
+  http.post("*/password/forgot", () => {
     return HttpResponse.json({
       success: true,
       message: "Email sent successfully",
     });
   }),
-  http.put("*/auth/password/reset/:token", () => {
+  http.put("*/password/reset/:token", () => {
     return HttpResponse.json({ success: true });
   }),
-  http.get("*/auth/admin/users", () => {
+  http.get("*/admin/users", () => {
     return HttpResponse.json({
       success: true,
       users: [mockAuthResponses.login.user],
       count: 1,
     });
   }),
-  http.get("*/auth/admin/users/:id", () => {
+  http.get("*/admin/users/:id", () => {
     return HttpResponse.json({ success: true, user: mockAuthResponses.login.user });
   }),
-  http.put("*/auth/admin/users/:id", () => {
+  http.put("*/admin/users/:id", () => {
     return HttpResponse.json({ success: true });
   }),
-  http.delete("*/auth/admin/users/:id", () => {
+  http.delete("*/admin/users/:id", () => {
     return HttpResponse.json({ success: true });
   }),
 ];
