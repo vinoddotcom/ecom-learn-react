@@ -4,6 +4,7 @@ import SignIn from "./components/auth/signIn";
 import SignUp from "./components/auth/signUp";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
+import HomePage from "./components/home/HomePage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import { getUserProfile } from "./store/slices/authSlice";
@@ -31,7 +32,7 @@ function App() {
               path={RoutePath.HOME}
               element={
                 <RouteGuard routeType={RouteType.PUBLIC}>
-                  <div className="mt-5 text-center">Home Page</div>
+                  <HomePage />
                 </RouteGuard>
               }
             />
