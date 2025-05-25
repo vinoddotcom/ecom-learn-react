@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import ProductService, { type Product, type ProductFilters } from "../../api/productService";
-import {
-  MagnifyingGlassIcon,
-  AdjustmentsHorizontalIcon,
-  ShoppingCartIcon,
-} from "@heroicons/react/24/outline";
+import { MagnifyingGlassIcon, AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
+import ProductCard from "./ProductCard";
 
 // Available categories
 const AVAILABLE_CATEGORIES = ["Electronics", "Cameras", "Laptops", "Accessories"];
@@ -427,41 +424,11 @@ const ProductListPage: React.FC = () => {
         ) : products.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map(product => (
-              <div
-                key={product._id}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <Link to={`/products/${product._id}`} className="block h-48 overflow-hidden">
-                  {product.images?.[0]?.url ? (
-                    <img
-                      src={product.images[0].url}
-                      alt={product.name}
-                      className="w-full h-full object-contain hover:scale-105 transition-transform"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-200"></div>
-                  )}
-                </Link>
-                <div className="p-4">
-                  <Link to={`/products/${product._id}`} className="block">
-                    <h3 className="text-lg font-medium text-gray-900 truncate">{product.name}</h3>
-                    <p className="text-sm text-gray-500 truncate mt-1">
-                      {product.description?.substring(0, 60)}...
-                    </p>
-                    <p className="text-xl font-semibold text-gray-900 mt-2">
-                      ${product.price?.toFixed(2)}
-                    </p>
-                  </Link>
-                  <div className="mt-4 flex">
-                    <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 flex items-center justify-center">
-                      <ShoppingCartIcon className="h-5 w-5 mr-1" /> Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
         ) : (
+          // </div>
           <div className="text-center p-12 bg-white rounded-lg shadow">
             <svg
               className="mx-auto h-12 w-12 text-gray-400"

@@ -2,18 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
   StarIcon,
-  ShoppingCartIcon,
   HeartIcon,
-//   ChevronRightIcon,
+  //   ChevronRightIcon,
   ChevronDownIcon,
   CheckIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import ProductService from "../../api/productService";
 import type { Review as ApiReview } from "../../api/productService";
-// import { useDispatch } from "react-redux";
-// We'll need to create cart actions later
-// import { addToCart } from "../../store/slices/cartSlice";
+import AddToCartButton from "../cart/AddToCartButton";
 
 // Extended interfaces for our needs
 interface Review extends ApiReview {
@@ -53,7 +50,7 @@ interface Product {
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   // Keeping dispatch for future cart implementation
-//   const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -129,26 +126,6 @@ const ProductDetailPage: React.FC = () => {
     setQuantity(newQuantity);
   };
 
-  // Handle add to cart
-  const handleAddToCart = () => {
-    if (!product) return;
-
-    // We'll implement this when we create the cart functionality
-    // dispatch(addToCart({
-    //   product: product._id,
-    //   name: product.name,
-    //   price: product.price,
-    //   image: product.images[0]?.url,
-    //   stock: product.stock,
-    //   quantity
-    // }));
-
-    // For now, just log the action and show an alert
-    console.log("Added to cart:", product.name, "Quantity:", quantity);
-
-    // Simple feedback for now - in a real app, use a toast notification
-    alert(`Added ${quantity} ${product.name} to cart!`);
-  };
 
   // Handle submit review
   const handleReviewSubmit = async (e: React.FormEvent) => {
@@ -397,14 +374,18 @@ const ProductDetailPage: React.FC = () => {
 
               {/* Add to Cart Button */}
               <div className="mb-6 flex space-x-4">
-                <button
-                  onClick={handleAddToCart}
-                  disabled={product.stock <= 0}
-                  className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 flex items-center justify-center"
-                >
-                  <ShoppingCartIcon className="h-5 w-5 mr-2" />
-                  Add to Cart
-                </button>
+                <div className="flex-1">
+                  <AddToCartButton
+                    productId={product._id}
+                    name={product.name}
+                    price={product.price}
+                    image={product.images[0]?.url || ""}
+                    stock={product.stock}
+                    quantity={quantity}
+                    size="lg"
+                    className="w-full"
+                  />
+                </div>
                 <button className="p-3 border border-gray-300 rounded-md hover:bg-gray-50">
                   <HeartIcon className="h-5 w-5 text-gray-600" />
                 </button>

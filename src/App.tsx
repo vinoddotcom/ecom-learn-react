@@ -7,6 +7,8 @@ import Footer from "./components/layout/footer";
 import HomePage from "./components/home/HomePage";
 import ProductListPage from "./components/products/ProductListPage";
 import ProductDetailPage from "./components/products/ProductDetailPage";
+import CartPage from "./components/cart/CartPage";
+import CheckoutPage from "./components/cart/CheckoutPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import { getUserProfile } from "./store/slices/authSlice";
@@ -85,6 +87,24 @@ function App() {
               element={
                 <RouteGuard routeType={RouteType.PUBLIC}>
                   <ProductDetailPage />
+                </RouteGuard>
+              }
+            />
+
+            <Route
+              path={RoutePath.CART}
+              element={
+                <RouteGuard routeType={RouteType.PUBLIC}>
+                  <CartPage />
+                </RouteGuard>
+              }
+            />
+
+            <Route
+              path={RoutePath.CHECKOUT}
+              element={
+                <RouteGuard routeType={RouteType.PROTECTED}>
+                  <CheckoutPage />
                 </RouteGuard>
               }
             />

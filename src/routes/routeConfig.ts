@@ -15,6 +15,8 @@ export const RoutePath = {
   SIGNUP: "/signup",
   PROFILE: "/profile",
   ORDERS: "/orders",
+  CART: "/cart",
+  CHECKOUT: "/checkout",
   PRODUCTS: "/products",
   PRODUCT_DETAIL: "/products/:id",
   ADMIN_PRODUCTS: "/admin/products",
@@ -57,6 +59,14 @@ export const routes: RouteConfig[] = [
   },
   {
     path: RoutePath.ORDERS,
+    type: RouteType.PROTECTED,
+  },
+  {
+    path: RoutePath.CART,
+    type: RouteType.PUBLIC,
+  },
+  {
+    path: RoutePath.CHECKOUT,
     type: RouteType.PROTECTED,
   },
   {

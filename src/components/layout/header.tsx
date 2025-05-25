@@ -25,6 +25,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { logout } from "../../store/slices/authSlice";
+import { selectCartItemsCount } from "../../store/slices/cartSlice";
 
 const navigation = {
   categories: [
@@ -198,6 +199,7 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector(state => state.auth);
+  const cartItemsCount = useAppSelector(selectCartItemsCount);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -572,7 +574,7 @@ export default function Header() {
                       className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                      {cartItemsCount}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>

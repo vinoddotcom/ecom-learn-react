@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductService, { type Product } from "../../api/productService";
-import { ArrowRightIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import ProductCard from "../products/ProductCard";
 
 // Featured categories (the ones currently available)
 const AVAILABLE_CATEGORIES = ["Electronics", "Cameras", "Laptops", "Accessories"];
@@ -182,40 +183,7 @@ const HomePage: React.FC = () => {
             ) : featuredProducts[category]?.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {featuredProducts[category].map(product => (
-                  <div
-                    key={product._id}
-                    className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-                  >
-                    <Link to={`/products/${product._id}`} className="block h-48 overflow-hidden">
-                      {product.images?.[0]?.url ? (
-                        <img
-                          src={product.images[0].url}
-                          alt={product.name}
-                          className="w-full h-full object-contain hover:scale-105 transition-transform"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gray-200"></div>
-                      )}
-                    </Link>
-                    <div className="p-4">
-                      <Link to={`/products/${product._id}`} className="block">
-                        <h3 className="text-lg font-medium text-gray-900 truncate">
-                          {product.name}
-                        </h3>
-                        <p className="text-sm text-gray-500 truncate mt-1">
-                          {product.description?.substring(0, 60)}...
-                        </p>
-                        <p className="text-xl font-semibold text-gray-900 mt-2">
-                          ${product.price?.toFixed(2)}
-                        </p>
-                      </Link>
-                      <div className="mt-4 flex">
-                        <button className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 flex items-center justify-center">
-                          <ShoppingCartIcon className="h-5 w-5 mr-1" /> Add to Cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <ProductCard key={product._id} product={product} />
                 ))}
               </div>
             ) : (
