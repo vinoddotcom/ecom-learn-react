@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../store/hooks";
 import { Link } from "react-router-dom";
 import ProductService, { type Product } from "../../api/productService";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
@@ -9,7 +8,6 @@ const AdminProductList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [deletingProducts, setDeletingProducts] = useState<Set<string>>(new Set());
-  const { user } = useAppSelector(state => state.auth);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -49,14 +47,7 @@ const AdminProductList: React.FC = () => {
     }
   };
 
-  if (!user || user.role !== "admin") {
-    return (
-      <div className="text-center p-8">
-        <h1 className="text-xl font-semibold text-red-500">Access Denied</h1>
-        <p className="mt-2">You don't have permission to view this page.</p>
-      </div>
-    );
-  }
+  // Access control is now handled by RouteGuard
 
   if (loading) {
     return (

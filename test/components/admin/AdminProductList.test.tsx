@@ -49,7 +49,7 @@ describe("AdminProductList Component", () => {
         setTimeout(() => {
           resolve({
             success: true,
-            products: mockProducts,
+            products: mockProducts as any,
             productsCount: mockProducts.length,
           });
         }, 100);
@@ -73,7 +73,7 @@ describe("AdminProductList Component", () => {
   it("should render the product list when loaded", async () => {
     vi.mocked(ProductService.getProducts).mockResolvedValue({
       success: true,
-      products: mockProducts,
+      products: mockProducts as any,
       productsCount: mockProducts.length,
     });
 
@@ -120,20 +120,29 @@ describe("AdminProductList Component", () => {
     expect(screen.getByText("Try Again")).toBeDefined();
   });
 
-  // Test for access denied
-  it("should show access denied message for non-admin users", () => {
+  // This test has been updated since access control is now handled by RouteGuard
+  it("should handle product loading without access control checks", () => {
+    // Mock successful product loading for any user since the component no longer does access checking
+    vi.mocked(ProductService.getProducts).mockResolvedValue({
+      success: true,
+      products: mockProducts as any,
+      productsCount: mockProducts.length,
+    });
+
     render(<AdminProductList />, {
       preloadedState: {
         auth: {
-          user: { role: "user" }, // Not an admin
+          user: { role: "user" }, // Role doesn't matter here as it's checked by RouteGuard
           isAuthenticated: true,
           loading: false,
         },
       },
     });
 
-    expect(screen.getByText("Access Denied")).toBeDefined();
-    expect(screen.getByText("You don't have permission to view this page.")).toBeDefined();
+    // Component will load products regardless of user role since RouteGuard
+    // would prevent this component from mounting for non-admin users
+    // This test verifies the component loads without access control errors
+    expect(ProductService.getProducts).toHaveBeenCalled();
   });
 
   // Test for delete product functionality

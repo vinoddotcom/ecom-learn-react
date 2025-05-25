@@ -181,9 +181,9 @@ const AdminProductForm: React.FC = () => {
       }
 
       // Redirect to products list after a delay
-      setTimeout(() => {
-        navigate("/admin/products");
-      }, 1500);
+      // setTimeout(() => {
+      //   navigate("/admin/products");
+      // }, 1500);
     } catch {
       setError(isEditing ? "Failed to update product" : "Failed to create product");
     } finally {
@@ -304,13 +304,13 @@ const AdminProductForm: React.FC = () => {
 
         {/* Stock */}
         <div>
-          <label htmlFor="stock" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="Stock" className="block text-sm font-medium text-gray-700">
             Stock
           </label>
           <input
             type="number"
-            id="stock"
-            name="stock"
+            id="Stock"
+            name="Stock"
             value={formData.Stock}
             onChange={handleInputChange}
             required
