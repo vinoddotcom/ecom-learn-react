@@ -1,5 +1,14 @@
 import { apiHelper } from "./config";
 
+export interface Review {
+  _id?: string;
+  name: string;
+  rating: number;
+  comment: string;
+  user?: string;
+  createdAt?: string;
+}
+
 export interface Product {
   _id?: string;
   name: string;
@@ -13,11 +22,7 @@ export interface Product {
   category: string;
   Stock: number;
   numOfReviews?: number;
-  reviews?: {
-    name: string;
-    rating: number;
-    comment: string;
-  }[];
+  reviews?: Review[];
   createdAt?: string;
 }
 
@@ -125,6 +130,35 @@ const ProductService = {
     apiHelper.put<{ success: boolean; message?: string }>(
       `/products/${productId}/review`,
       reviewData
+    ),
+
+  /**
+   * Submit a review for a product using the /review endpoint as per API spec
+   */
+  submitReview: (
+    productId: string,
+    reviewData: {
+      rating: number;
+      comment: string;
+    }
+  ) =>
+    apiHelper.put<{ success: boolean; message?: string }>(`/review`, {
+      productId,
+      ...reviewData,
+    }),
+
+  /**
+   * Get all reviews for a product
+   */
+  getProductReviews: (productId: string) =>
+    apiHelper.get<{ success: boolean; reviews: Review[] }>(`/reviews?productId=${productId}`),
+
+  /**
+   * Delete a review
+   */
+  deleteReview: (productId: string, reviewId: string) =>
+    apiHelper.delete<{ success: boolean; message?: string }>(
+      `/reviews?productId=${productId}&reviewId=${reviewId}`
     ),
 };
 

@@ -4,18 +4,19 @@ import {
   StarIcon,
   ShoppingCartIcon,
   HeartIcon,
-  ChevronRightIcon,
+//   ChevronRightIcon,
   ChevronDownIcon,
   CheckIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import ProductService from "../../api/productService";
-import { useDispatch } from "react-redux";
+import type { Review as ApiReview } from "../../api/productService";
+// import { useDispatch } from "react-redux";
 // We'll need to create cart actions later
 // import { addToCart } from "../../store/slices/cartSlice";
 
 // Extended interfaces for our needs
-interface Review {
+interface Review extends ApiReview {
   _id?: string;
   name: string;
   rating: number;
@@ -52,7 +53,7 @@ interface Product {
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   // Keeping dispatch for future cart implementation
-  const dispatch = useDispatch();
+//   const dispatch = useDispatch();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -94,12 +95,12 @@ const ProductDetailPage: React.FC = () => {
             numOfReviews: productData.numOfReviews || 0,
             reviews: Array.isArray(productData.reviews)
               ? productData.reviews.map(review => ({
-                  _id: (review as {_id: string})._id || Date.now().toString(),
+                  _id: (review as { _id: string })._id || Date.now().toString(),
                   name: review.name,
                   rating: review.rating,
                   comment: review.comment,
-                  user: (review as any).user || "unknown",
-                  createdAt: (review as any).createdAt || new Date().toISOString(),
+                  user: review.user || "unknown",
+                  createdAt: review.createdAt || new Date().toISOString(),
                 }))
               : [],
             user: "unknown", // Default user ID
@@ -158,20 +159,21 @@ const ProductDetailPage: React.FC = () => {
     try {
       setSubmittingReview(true);
 
-      // Mock API call - replace with actual call when implemented
-      // await ProductService.submitReview(id, { rating, comment });
+      // Use the actual API call as defined in the Swagger API spec
+      await ProductService.submitReview(id, { rating, comment });
 
-      // Add the review to the product state (this would normally happen via API refresh)
+      // Create a new review object to update the UI immediately
       const newReview: Review = {
         _id: Date.now().toString(),
-        name: "Current User", // Replace with actual user name
+        name: "Current User", // Replace with actual user name when authentication is implemented
         rating,
         comment,
-        user: "user_id", // Replace with actual user ID
+        user: "user_id", // Replace with actual user ID when authentication is implemented
         createdAt: new Date().toISOString(),
       };
 
       if (product) {
+        // Update the product state with the new review
         setProduct({
           ...product,
           reviews: [newReview, ...product.reviews],
@@ -185,12 +187,15 @@ const ProductDetailPage: React.FC = () => {
       setComment("");
       setSubmittingReview(false);
 
-      // Show a success message
+      // Show success message
+      alert("Review submitted successfully!");
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
       console.error("Failed to submit review:", errorMessage);
       setSubmittingReview(false);
-      // Show an error message
+
+      // Show error message
+      alert("Failed to submit review. Please try again.");
     }
   };
 
@@ -264,7 +269,6 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
       {/* Product Details Section */}
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
