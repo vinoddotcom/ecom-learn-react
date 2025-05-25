@@ -84,7 +84,7 @@ export default function AdminOrderDetailPage() {
       }
     } catch (err) {
       console.error("Error updating order status:", err);
-      setError("An error occurred while updating order status");
+      setError((err as {response: {data: {message: string}}}).response.data.message || "An error occurred while updating order status");
     } finally {
       setIsUpdatingStatus(false);
     }

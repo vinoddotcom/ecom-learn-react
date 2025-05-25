@@ -243,7 +243,10 @@ const AdminOrdersPage: React.FC = () => {
   };
 
   // Handle order status update
-  const handleUpdateOrderStatus = async (orderId: string, newStatus: "Processing" | "Shipped" | "Delivered") => {
+  const handleUpdateOrderStatus = async (
+    orderId: string,
+    newStatus: "Processing" | "Shipped" | "Delivered"
+  ) => {
     setStatusUpdateLoading(prev => new Set(prev).add(orderId));
 
     try {
@@ -266,7 +269,10 @@ const AdminOrdersPage: React.FC = () => {
       }
     } catch (err) {
       console.error("Error updating order status:", err);
-      setError("An error occurred while updating the order status");
+      setError(
+        (err as { response: { data: { message: string } } }).response.data.message ||
+          "An error occurred while updating order status"
+      );
 
       // Clear error message after 3 seconds
       setTimeout(() => setError(null), 3000);
@@ -632,7 +638,12 @@ const AdminOrdersPage: React.FC = () => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <select
                     value={order.orderStatus}
-                    onChange={e => handleUpdateOrderStatus(order._id!, e.target.value as "Processing" | "Shipped" | "Delivered")}
+                    onChange={e =>
+                      handleUpdateOrderStatus(
+                        order._id!,
+                        e.target.value as "Processing" | "Shipped" | "Delivered"
+                      )
+                    }
                     disabled={statusUpdateLoading.has(order._id!)}
                     className="mt-1 block w-full pl-3 pr-10 py-2 text-sm border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md"
                   >

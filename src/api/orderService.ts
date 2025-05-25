@@ -77,12 +77,12 @@ const OrderService = {
    * Update order status (admin only)
    */
   updateOrderStatus: (orderId: string, status: string) =>
-    apiHelper.put<OrderResponse>(`/orders/${orderId}/status`, { status }),
+    apiHelper.put<OrderResponse>(`admin/order/${orderId}`, { status }),
 
   /**
    * Delete order (admin only)
    */
-  deleteOrder: (orderId: string) => apiHelper.delete<OrderResponse>(`/orders/${orderId}`),
+  deleteOrder: (orderId: string) => apiHelper.delete<OrderResponse>(`admin/order/${orderId}`),
 };
 
 export default OrderService;
