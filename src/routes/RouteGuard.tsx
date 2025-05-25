@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../store/hooks";
-import { getUserProfile } from "../store/slices/authSlice";
 import { RouteType } from "./routeConfig";
 
 interface RouteGuardProps {
@@ -32,7 +31,7 @@ const RouteGuard: React.FC<RouteGuardProps> = ({ children, routeType }) => {
 
     // For protected and admin routes, check authentication
     if (!isAuthenticated && !loading) {
-      dispatch(getUserProfile());
+    //   dispatch(getUserProfile());
       setAuthCheckAttempted(true);
     } else if (!loading) {
       // If we're not loading and we have auth status, mark check as attempted

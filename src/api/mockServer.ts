@@ -15,7 +15,7 @@ export const sampleProducts: Product[] = [
       },
     ],
     category: "Electronics",
-    stock: 50,
+    Stock: 50,
     numOfReviews: 25,
     reviews: [
       {
@@ -38,7 +38,7 @@ export const sampleProducts: Product[] = [
       },
     ],
     category: "Electronics",
-    stock: 35,
+    Stock: 35,
     numOfReviews: 18,
     reviews: [
       {
@@ -61,7 +61,7 @@ export const sampleProducts: Product[] = [
       },
     ],
     category: "Fashion",
-    stock: 100,
+    Stock: 100,
     numOfReviews: 32,
     reviews: [
       {

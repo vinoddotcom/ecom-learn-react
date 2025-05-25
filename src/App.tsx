@@ -15,7 +15,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // Start global authentication check - this will make sure the auth state is initialized
+    // This will make sure the auth state is initialized
     // This is important for the first load, but route-specific checks will be handled by RouteGuard
     dispatch(getUserProfile());
   }, [dispatch]); // Only runs once on mount
