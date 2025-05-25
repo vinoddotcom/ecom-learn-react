@@ -18,7 +18,7 @@ import {
 } from "@headlessui/react";
 import {
   Bars3Icon,
-  MagnifyingGlassIcon,
+  // MagnifyingGlassIcon,
   ShoppingBagIcon,
   UserIcon,
   XMarkIcon,
@@ -369,7 +369,7 @@ export default function Header() {
         </div>
       </Dialog>
 
-      <header className="relative bg-white">
+      <header className="relative bg-white z-40">
         {/* <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
           Summer Sale! Get free delivery on orders over $100 + 10% off with code SUMMER10
         </p> */}
@@ -417,7 +417,7 @@ export default function Header() {
 
                       <PopoverPanel
                         transition
-                        className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in"
+                        className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-150 data-leave:ease-in z-50"
                       >
                         {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
                         <div
@@ -506,7 +506,7 @@ export default function Header() {
                           )}
                           <span className="ml-2">{user?.name?.split(" ")[0] || "User"}</span>
                         </PopoverButton>
-                        <PopoverPanel className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <PopoverPanel className="absolute right-0 z-50 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Link
                             to="/profile"
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -556,67 +556,13 @@ export default function Header() {
                   )}
                 </div>
 
-                <div className="hidden lg:ml-8 lg:flex">
-                  <Popover className="relative">
-                    <PopoverButton className="flex items-center text-gray-700 hover:text-gray-800 group">
-                      <img
-                        alt=""
-                        src="https://tailwindcss.com/plus-assets/img/flags/flag-united-states.svg"
-                        className="block h-auto w-5 shrink-0"
-                      />
-                      <span className="ml-3 block text-sm font-medium">USD</span>
-                      <span className="sr-only">, change currency</span>
-                      <svg
-                        className="ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </PopoverButton>
-                    <PopoverPanel className="absolute mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <div className="py-1">
-                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-900 bg-gray-100">
-                          <img
-                            alt=""
-                            src="https://tailwindcss.com/plus-assets/img/flags/flag-united-states.svg"
-                            className="mr-3 h-auto w-4 shrink-0"
-                          />
-                          USD
-                        </button>
-                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          <img
-                            alt=""
-                            src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
-                            className="mr-3 h-auto w-4 shrink-0"
-                          />
-                          CAD
-                        </button>
-                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                          <img
-                            alt=""
-                            src="https://tailwindcss.com/plus-assets/img/flags/flag-european-union.svg"
-                            className="mr-3 h-auto w-4 shrink-0"
-                          />
-                          EUR
-                        </button>
-                      </div>
-                    </PopoverPanel>
-                  </Popover>
-                </div>
-
                 {/* Search */}
-                <div className="flex lg:ml-6">
+                {/* <div className="flex lg:ml-6">
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Search</span>
                     <MagnifyingGlassIcon aria-hidden="true" className="size-6" />
                   </a>
-                </div>
+                </div> */}
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">

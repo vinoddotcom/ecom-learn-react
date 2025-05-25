@@ -19,10 +19,21 @@ export interface OrderResponse {
   message?: string;
 }
 
+export interface AdminOrderResponse {
+  success?: boolean;
+  message?: string;
+}
+
 export interface OrderListResponse {
   success: boolean;
   orders: Order[];
   count: number;
+}
+
+export interface AdminOrderListResponse {
+  success?: boolean;
+  totalAmount?: number;
+  orders?: Order[];
 }
 
 const OrderService = {
@@ -37,15 +48,30 @@ const OrderService = {
    */
   getOrderById: (orderId: string) => apiHelper.get<OrderResponse>(`/orders/${orderId}`),
 
+    /**
+   * Get order by ID (admin only)
+   */
+  deleteAdminOrderById: (orderId: string) => apiHelper.delete<AdminOrderResponse>(`admin/orders/${orderId}`),
+
+      /**
+   * Get order by ID (admin only)
+   */
+  updateAdminOrderById: (orderId: string) => apiHelper.put<AdminOrderResponse>(`admin/orders/${orderId}`),
+
   /**
    * Get all orders for the current user
    */
   getMyOrders: () => apiHelper.get<OrderListResponse>("/orders/me"),
 
   /**
-   * Get all orders (admin only)
+   * Get all orders
    */
   getAllOrders: () => apiHelper.get<OrderListResponse>("/orders"),
+
+  /**
+   * Get all orders (admin only)
+   */
+  getAdminOrders: () => apiHelper.get<AdminOrderListResponse>("/admin/orders"),
 
   /**
    * Update order status (admin only)
