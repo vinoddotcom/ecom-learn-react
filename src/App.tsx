@@ -6,6 +6,7 @@ import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import HomePage from "./components/home/HomePage";
 import ProductListPage from "./components/products/ProductListPage";
+import ProductDetailPage from "./components/products/ProductDetailPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import { getUserProfile } from "./store/slices/authSlice";
@@ -74,8 +75,16 @@ function App() {
             <Route
               path={RoutePath.PRODUCTS}
               element={
-                <RouteGuard routeType={RouteType.PROTECTED}>
+                <RouteGuard routeType={RouteType.PUBLIC}>
                   <ProductListPage />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path={RoutePath.PRODUCT_DETAIL}
+              element={
+                <RouteGuard routeType={RouteType.PUBLIC}>
+                  <ProductDetailPage />
                 </RouteGuard>
               }
             />

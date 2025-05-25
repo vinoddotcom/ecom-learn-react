@@ -82,6 +82,11 @@ const ProductService = {
   getProductById: (productId: string) => apiHelper.get<ProductResponse>(`/product/${productId}`),
 
   /**
+   * Get product details with reviews
+   */
+  getProductDetails: (productId: string) => apiHelper.get<ProductResponse>(`/product/${productId}`),
+
+  /**
    * Create new product (admin only)
    */
   createProduct: (productData: FormData) =>
@@ -104,7 +109,8 @@ const ProductService = {
   /**
    * Delete product (admin only)
    */
-  deleteProduct: (productId: string) => apiHelper.delete<ProductResponse>(`/admin/product/${productId}`),
+  deleteProduct: (productId: string) =>
+    apiHelper.delete<ProductResponse>(`/admin/product/${productId}`),
 
   /**
    * Create or update review
