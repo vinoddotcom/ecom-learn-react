@@ -23,6 +23,8 @@ export const RoutePath = {
   ADMIN_PRODUCTS: "/admin/products",
   ADMIN_PRODUCTS_NEW: "/admin/products/new",
   ADMIN_PRODUCTS_EDIT: "/admin/products/edit/:id",
+  ADMIN_ORDERS: "/admin/orders",
+  ADMIN_ORDER_DETAIL: "/admin/orders/:id",
 };
 
 // Simple route configuration without React components
@@ -84,6 +86,14 @@ export const routes: RouteConfig[] = [
   },
   {
     path: RoutePath.ADMIN_PRODUCTS_EDIT,
+    type: RouteType.ADMIN,
+  },
+  {
+    path: RoutePath.ADMIN_ORDERS,
+    type: RouteType.ADMIN,
+  },
+  {
+    path: RoutePath.ADMIN_ORDER_DETAIL,
     type: RouteType.ADMIN,
   },
 ];

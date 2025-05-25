@@ -13,6 +13,8 @@ import OrdersPage from "./components/orders/OrdersPage";
 import OrderDetailPage from "./components/orders/OrderDetailPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
+import AdminOrdersPage from "./components/admin/AdminOrdersPage";
+import AdminOrderDetailPage from "./components/admin/AdminOrderDetailPage";
 import { getUserProfile } from "./store/slices/authSlice";
 import { useAppDispatch } from "./store/hooks";
 import RouteGuard from "./routes/RouteGuard";
@@ -141,6 +143,22 @@ function App() {
               element={
                 <RouteGuard routeType={RouteType.ADMIN}>
                   <AdminProductForm />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path={RoutePath.ADMIN_ORDERS}
+              element={
+                <RouteGuard routeType={RouteType.ADMIN}>
+                  <AdminOrdersPage />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path={RoutePath.ADMIN_ORDER_DETAIL}
+              element={
+                <RouteGuard routeType={RouteType.ADMIN}>
+                  <AdminOrderDetailPage />
                 </RouteGuard>
               }
             />

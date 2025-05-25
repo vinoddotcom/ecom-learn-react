@@ -522,13 +522,20 @@ export default function Header() {
                             Orders
                           </Link>
                           {user?.role === "admin" && (
-                            <Link
-                              // to="/admin/dashboard"
-                              to="/admin/products"
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            >
-                              Admin Dashboard
-                            </Link>
+                            <>
+                              <Link
+                                to="/admin/products"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                Admin Products
+                              </Link>
+                              <Link
+                                to="/admin/orders"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                Admin Orders
+                              </Link>
+                            </>
                           )}
                           <button
                             onClick={handleLogout}

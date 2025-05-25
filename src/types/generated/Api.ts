@@ -50,8 +50,15 @@ export interface Order {
   _id?: string;
   shippingInfo?: ShippingInfo;
   orderItems?: OrderItem[];
-  /** ID of the user who placed the order */
-  user?: string;
+  /** User details who placed the order (populated from User model) */
+  user?: {
+    /** Name of the user who placed the order */
+    _id?: string;
+    /** Name of the user who placed the order */
+    name?: string;
+    /** Email of the user who placed the order */
+    email?: string;
+  };
   paymentInfo?: PaymentInfo;
   /**
    * Date and time when payment was made
