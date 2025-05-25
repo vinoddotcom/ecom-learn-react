@@ -29,129 +29,168 @@ import { logout } from "../../store/slices/authSlice";
 const navigation = {
   categories: [
     {
-      id: "women",
-      name: "Women",
+      id: "electronics",
+      name: "Electronics",
       featured: [
         {
           name: "New Arrivals",
-          href: "#",
+          href: "/products?category=electronics",
           imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt: "Models sitting back to back, wearing Basic Tee in black and bone.",
+            "https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+          imageAlt: "Collection of the latest electronics and gadgets.",
         },
         {
-          name: "Basic Tees",
-          href: "#",
+          name: "Best Sellers",
+          href: "/products",
           imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-02.jpg",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
+            "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+          imageAlt: "Our most popular electronics products and accessories.",
         },
       ],
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
+          id: "computers",
+          name: "Computers",
           items: [
-            { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Denim", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
+            { name: "Laptops", href: "/products?category=laptops" },
+            { name: "Desktop PCs", href: "/products?category=desktops" },
+            { name: "Monitors", href: "/products?category=monitors" },
+            { name: "Keyboards", href: "/products?category=keyboards" },
+            { name: "Mice", href: "/products?category=mice" },
+            { name: "Printers", href: "/products?category=printers" },
+            { name: "Computer Components", href: "/products?category=components" },
+            { name: "Storage & Drives", href: "/products?category=storage" },
+            { name: "Networking", href: "/products?category=networking" },
           ],
         },
         {
-          id: "accessories",
-          name: "Accessories",
+          id: "mobile",
+          name: "Mobile Devices",
           items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
+            { name: "Smartphones", href: "/products?category=smartphones" },
+            { name: "Tablets", href: "/products?category=tablets" },
+            { name: "Smartwatches", href: "/products?category=smartwatches" },
+            { name: "Phone Cases", href: "/products?category=phone-cases" },
+            { name: "Screen Protectors", href: "/products?category=screen-protectors" },
+            { name: "Power Banks", href: "/products?category=power-banks" },
           ],
         },
         {
           id: "brands",
-          name: "Brands",
+          name: "Popular Brands",
           items: [
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Significant Other", href: "#" },
+            { name: "Apple", href: "/products?brand=apple" },
+            { name: "Samsung", href: "/products?brand=samsung" },
+            { name: "Sony", href: "/products?brand=sony" },
+            { name: "Dell", href: "/products?brand=dell" },
+            { name: "HP", href: "/products?brand=hp" },
+            { name: "Logitech", href: "/products?brand=logitech" },
           ],
         },
       ],
     },
     {
-      id: "men",
-      name: "Men",
+      id: "cameras",
+      name: "Cameras",
       featured: [
         {
-          name: "New Arrivals",
-          href: "#",
+          name: "Featured Cameras",
+          href: "/products?category=cameras",
           imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
-          imageAlt: "Drawstring top with elastic loop closure and textured interior padding.",
+            "https://images.unsplash.com/photo-1510127034890-ba27508e9f1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+          imageAlt: "Professional and amateur cameras and photography equipment.",
         },
         {
-          name: "Artwork Tees",
-          href: "#",
+          name: "Photography Essentials",
+          href: "/products?category=camera-accessories",
           imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-02-image-card-06.jpg",
-          imageAlt:
-            "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.",
+            "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+          imageAlt: "Collection of camera accessories including lenses, tripods, and camera bags.",
         },
       ],
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
+          id: "cameras-types",
+          name: "Camera Types",
           items: [
-            { name: "Tops", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
+            { name: "DSLR Cameras", href: "/products?category=dslr" },
+            { name: "Mirrorless Cameras", href: "/products?category=mirrorless" },
+            { name: "Point & Shoot", href: "/products?category=point-and-shoot" },
+            { name: "Action Cameras", href: "/products?category=action-cameras" },
+            { name: "Drones", href: "/products?category=drones" },
+            { name: "Film Cameras", href: "/products?category=film-cameras" },
+            { name: "Browse All", href: "/products?category=cameras" },
           ],
         },
         {
           id: "accessories",
-          name: "Accessories",
+          name: "Camera Accessories",
           items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
+            { name: "Lenses", href: "/products?category=lenses" },
+            { name: "Tripods", href: "/products?category=tripods" },
+            { name: "Camera Bags", href: "/products?category=camera-bags" },
+            { name: "Memory Cards", href: "/products?category=memory-cards" },
+            { name: "Filters", href: "/products?category=filters" },
+            { name: "Lighting", href: "/products?category=lighting" },
           ],
         },
         {
-          id: "brands",
-          name: "Brands",
+          id: "camera-brands",
+          name: "Popular Camera Brands",
           items: [
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
+            { name: "Canon", href: "/products?brand=canon" },
+            { name: "Nikon", href: "/products?brand=nikon" },
+            { name: "Sony", href: "/products?brand=sony" },
+            { name: "Fujifilm", href: "/products?brand=fujifilm" },
+            { name: "GoPro", href: "/products?brand=gopro" },
+            { name: "DJI", href: "/products?brand=dji" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "accessories",
+      name: "Accessories",
+      featured: [
+        {
+          name: "Featured Accessories",
+          href: "/products?category=accessories",
+          imageSrc:
+            "https://images.unsplash.com/photo-1625961332771-3be6d2cbc49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
+          imageAlt: "Collection of tech accessories and peripherals.",
+        },
+      ],
+      sections: [
+        {
+          id: "audio",
+          name: "Audio",
+          items: [
+            { name: "Headphones", href: "/products?category=headphones" },
+            { name: "Earbuds", href: "/products?category=earbuds" },
+            { name: "Bluetooth Speakers", href: "/products?category=bluetooth-speakers" },
+            { name: "Microphones", href: "/products?category=microphones" },
+            { name: "Home Audio", href: "/products?category=home-audio" },
+            { name: "Car Audio", href: "/products?category=car-audio" },
+          ],
+        },
+        {
+          id: "peripherals",
+          name: "Computer Peripherals",
+          items: [
+            { name: "External Hard Drives", href: "/products?category=external-drives" },
+            { name: "USB Hubs", href: "/products?category=usb-hubs" },
+            { name: "Webcams", href: "/products?category=webcams" },
+            { name: "Cables & Adapters", href: "/products?category=cables" },
+            { name: "Computer Accessories", href: "/products?category=computer-accessories" },
           ],
         },
       ],
     },
   ],
-  pages: [
-    { name: "Company", href: "/company" },
-    { name: "Stores", href: "/stores" },
-  ],
+  // pages: [
+  //   { name: "Deals", href: "/deals" },
+  //   { name: "Support", href: "/support" },
+  // ],
 };
 
 export default function Header() {
@@ -207,7 +246,7 @@ export default function Header() {
               </div>
               <TabPanels as={Fragment}>
                 {navigation.categories.map(category => (
-                  <TabPanel key={category.name} className="space-y-10 px-4 pt-10 pb-8">
+                  <TabPanel key={category.name} className="space-y-10 px-4 pt-10 pb-8 z-50">
                     <div className="grid grid-cols-2 gap-x-4">
                       {category.featured.map(item => (
                         <div key={item.name} className="group relative text-sm">
@@ -255,16 +294,6 @@ export default function Header() {
             </TabGroup>
 
             <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-              {navigation.pages.map(page => (
-                <div key={page.name} className="flow-root">
-                  <Link to={page.href} className="-m-2 block p-2 font-medium text-gray-900">
-                    {page.name}
-                  </Link>
-                </div>
-              ))}
-            </div>
-
-            <div className="space-y-6 border-t border-gray-200 px-4 py-6">
               {isAuthenticated ? (
                 <>
                   <div className="flow-root">
@@ -308,24 +337,42 @@ export default function Header() {
             </div>
 
             <div className="border-t border-gray-200 px-4 py-6">
-              <a href="#" className="-m-2 flex items-center p-2">
-                <img
-                  alt=""
-                  src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
-                  className="block h-auto w-5 shrink-0"
-                />
-                <span className="ml-3 block text-base font-medium text-gray-900">CAD</span>
-                <span className="sr-only">, change currency</span>
-              </a>
+              <p className="mb-2 block text-base font-medium text-gray-900">Currency</p>
+              <div className="flex flex-col space-y-3">
+                <button className="-m-2 flex items-center p-2">
+                  <img
+                    alt="USD"
+                    src="https://tailwindcss.com/plus-assets/img/flags/flag-united-states.svg"
+                    className="block h-auto w-5 shrink-0"
+                  />
+                  <span className="ml-3 block text-base font-medium text-gray-900">USD</span>
+                </button>
+                <button className="-m-2 flex items-center p-2">
+                  <img
+                    alt="CAD"
+                    src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
+                    className="block h-auto w-5 shrink-0"
+                  />
+                  <span className="ml-3 block text-base font-medium text-gray-500">CAD</span>
+                </button>
+                <button className="-m-2 flex items-center p-2">
+                  <img
+                    alt="EUR"
+                    src="https://tailwindcss.com/plus-assets/img/flags/flag-european-union.svg"
+                    className="block h-auto w-5 shrink-0"
+                  />
+                  <span className="ml-3 block text-base font-medium text-gray-500">EUR</span>
+                </button>
+              </div>
             </div>
           </DialogPanel>
         </div>
       </Dialog>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          Get free delivery on orders over $100
-        </p>
+        {/* <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+          Summer Sale! Get free delivery on orders over $100 + 10% off with code SUMMER10
+        </p> */}
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="border-b border-gray-200">
@@ -343,12 +390,17 @@ export default function Header() {
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <Link to="/">
-                  <span className="sr-only">Your Company</span>
-                  <img
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                    className="h-8 w-auto"
-                  />
+                  <span className="sr-only">TechElectronics</span>
+                  <div className="flex items-center">
+                    <img
+                      alt=""
+                      src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                      className="h-8 w-auto"
+                    />
+                    <span className="ml-2 text-lg font-semibold text-indigo-600">
+                      TechElectronics
+                    </span>
+                  </div>
                 </Link>
               </div>
 
@@ -431,16 +483,6 @@ export default function Header() {
                       </PopoverPanel>
                     </Popover>
                   ))}
-
-                  {navigation.pages.map(page => (
-                    <Link
-                      key={page.name}
-                      to={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </Link>
-                  ))}
                 </div>
               </PopoverGroup>
 
@@ -515,15 +557,57 @@ export default function Header() {
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
-                  <a href="#" className="flex items-center text-gray-700 hover:text-gray-800">
-                    <img
-                      alt=""
-                      src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
-                      className="block h-auto w-5 shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
-                    <span className="sr-only">, change currency</span>
-                  </a>
+                  <Popover className="relative">
+                    <PopoverButton className="flex items-center text-gray-700 hover:text-gray-800 group">
+                      <img
+                        alt=""
+                        src="https://tailwindcss.com/plus-assets/img/flags/flag-united-states.svg"
+                        className="block h-auto w-5 shrink-0"
+                      />
+                      <span className="ml-3 block text-sm font-medium">USD</span>
+                      <span className="sr-only">, change currency</span>
+                      <svg
+                        className="ml-2 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </PopoverButton>
+                    <PopoverPanel className="absolute mt-2 w-40 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-900 bg-gray-100">
+                          <img
+                            alt=""
+                            src="https://tailwindcss.com/plus-assets/img/flags/flag-united-states.svg"
+                            className="mr-3 h-auto w-4 shrink-0"
+                          />
+                          USD
+                        </button>
+                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          <img
+                            alt=""
+                            src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
+                            className="mr-3 h-auto w-4 shrink-0"
+                          />
+                          CAD
+                        </button>
+                        <button className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          <img
+                            alt=""
+                            src="https://tailwindcss.com/plus-assets/img/flags/flag-european-union.svg"
+                            className="mr-3 h-auto w-4 shrink-0"
+                          />
+                          EUR
+                        </button>
+                      </div>
+                    </PopoverPanel>
+                  </Popover>
                 </div>
 
                 {/* Search */}

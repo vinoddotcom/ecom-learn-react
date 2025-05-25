@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
   const heroProduct = featuredProducts[heroCategory]?.[0];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 z-[0]">
       {/* Hero Section */}
       {loading ? (
         <div className="w-full h-96 flex items-center justify-center bg-gray-100">
