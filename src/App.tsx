@@ -5,6 +5,7 @@ import SignUp from "./components/auth/signUp";
 import Header from "./components/layout/header";
 import Footer from "./components/layout/footer";
 import HomePage from "./components/home/HomePage";
+import ProductListPage from "./components/products/ProductListPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import { getUserProfile } from "./store/slices/authSlice";
@@ -70,12 +71,20 @@ function App() {
                 </RouteGuard>
               }
             />
+            <Route
+              path={RoutePath.PRODUCTS}
+              element={
+                <RouteGuard routeType={RouteType.PROTECTED}>
+                  <ProductListPage />
+                </RouteGuard>
+              }
+            />
 
             {/* Admin routes - check both auth and admin role */}
             <Route
               path={RoutePath.ADMIN_PRODUCTS}
               element={
-                <RouteGuard routeType={RouteType.ADMIN}>
+                <RouteGuard routeType={RouteType.PUBLIC}>
                   <AdminProductList />
                 </RouteGuard>
               }

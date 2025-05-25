@@ -15,6 +15,8 @@ export const RoutePath = {
   SIGNUP: "/signup",
   PROFILE: "/profile",
   ORDERS: "/orders",
+  PRODUCTS: "/products",
+  PRODUCT_DETAIL: "/products/:id",
   ADMIN_PRODUCTS: "/admin/products",
   ADMIN_PRODUCTS_NEW: "/admin/products/new",
   ADMIN_PRODUCTS_EDIT: "/admin/products/edit/:id",
@@ -39,6 +41,14 @@ export const routes: RouteConfig[] = [
   },
   {
     path: RoutePath.SIGNUP,
+    type: RouteType.PUBLIC,
+  },
+  {
+    path: RoutePath.PRODUCTS,
+    type: RouteType.PUBLIC,
+  },
+  {
+    path: RoutePath.PRODUCT_DETAIL,
     type: RouteType.PUBLIC,
   },
   {
