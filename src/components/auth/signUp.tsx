@@ -62,12 +62,12 @@ export default function SignUp() {
     }
 
     const formData = new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
-    formData.set("password", password);
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
 
     if (avatar) {
-      formData.set("avatar", avatar);
+      formData.append("avatar", avatar);
     }
 
     // Dispatch registration action
@@ -185,8 +185,8 @@ export default function SignUp() {
                     className="h-12 w-12 rounded-full object-cover"
                   />
                 ) : (
-                  <div className="h-12 w-12 rounded-full bg-gray-200 flex items-center justify-center">
-                    <span className="text-gray-400">No image</span>
+                  <div className="size-12 rounded-full bg-gray-200 flex items-center justify-center">
+                    {/* <span className="text-gray-400">No image</span> */}
                   </div>
                 )}
                 <input
@@ -194,12 +194,7 @@ export default function SignUp() {
                   name="avatar"
                   accept="image/*"
                   onChange={handleAvatarChange}
-                  className="block w-full text-sm text-gray-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-md file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-indigo-50 file:text-indigo-700
-                                    hover:file:bg-indigo-100"
+                  className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                 />
               </div>
             </div>

@@ -394,11 +394,11 @@ export default function Header() {
                 <Link to="/">
                   <span className="sr-only">TechElectronics</span>
                   <div className="flex items-center">
-                    <img
+                    {/* <img
                       alt=""
                       src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                       className="h-8 w-auto"
-                    />
+                    /> */}
                     <span className="ml-2 text-lg font-semibold text-indigo-600">
                       TechElectronics
                     </span>

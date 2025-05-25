@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
 import AuthService, { type User, type AuthResponse } from "../../api/authService";
+import { clearCart } from "./cartSlice";
 
 // Define types
 interface AuthState {
@@ -52,6 +53,7 @@ export const register = createAsyncThunk(
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
+  clearCart()
   // No need to manually remove token - handled by API via cookies
   return null;
 });
@@ -167,3 +169,4 @@ const authSlice = createSlice({
 
 export const { clearError } = authSlice.actions;
 export default authSlice.reducer;
+

@@ -165,14 +165,12 @@ const ProductDetailPage: React.FC = () => {
       setSubmittingReview(false);
 
       // Show success message
-      alert("Review submitted successfully!");
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
       console.error("Failed to submit review:", errorMessage);
       setSubmittingReview(false);
 
       // Show error message
-      alert("Failed to submit review. Please try again.");
     }
   };
 
