@@ -41,7 +41,7 @@ const OrderService = {
    * Create a new order
    */
   createOrder: (orderData: CreateOrderRequest) =>
-    apiHelper.post<OrderResponse>("/orders", orderData),
+    apiHelper.post<OrderResponse>("/order/new", orderData),
 
   /**
    * Get order by ID
