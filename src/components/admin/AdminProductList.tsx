@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ProductService, { type Product, type ProductFilters } from "../../api/productService";
 import { PencilIcon, TrashIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/16/solid";
 
 const AdminProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -17,7 +18,6 @@ const AdminProductList: React.FC = () => {
 
   // Filter states
   const [filters, setFilters] = useState<ProductFilters>({
-
     keyword: "",
     category: "",
     page: 1,
@@ -55,7 +55,7 @@ const AdminProductList: React.FC = () => {
         setProducts(response.products);
         setProductsCount(response.productsCount);
 
-        // Calculate total pages
+        // Calculate total pagesElectronics
         const perPage = response.resultPerPage || filters.limit || 10;
         setResultsPerPage(perPage);
         setTotalPages(Math.ceil(response.productsCount / perPage));
@@ -187,7 +187,7 @@ const AdminProductList: React.FC = () => {
               value={searchInput}
               onChange={handleSearchInputChange}
               placeholder="Search products..."
-              className="w-full p-2 border border-gray-300 rounded-l pl-10"
+              className="w-full p-2 appearance-none rounded-l bg-white text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500 pl-10"
             />
             <MagnifyingGlassIcon className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
             <button
@@ -200,12 +200,12 @@ const AdminProductList: React.FC = () => {
             </button>
           </div>
 
-          <div>
+          <div className="relative">
             <select
               name="category"
               value={filters.category}
               onChange={handleFilterChange}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 pr-8 appearance-none rounded bg-white text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500"
             >
               <option value="">All Categories</option>
               {categories.map(category => (
@@ -214,26 +214,34 @@ const AdminProductList: React.FC = () => {
                 </option>
               ))}
             </select>
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 size-5 text-gray-500"
+            />
           </div>
 
-          <div>
+          <div className="relative">
             <select
               name="limit"
               value={filters.limit}
               onChange={handleFilterChange}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 pr-8 appearance-none rounded bg-white text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-500"
             >
               <option value="5">5 per page</option>
               <option value="10">10 per page</option>
               <option value="25">25 per page</option>
               <option value="50">50 per page</option>
             </select>
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="pointer-events-none absolute right-2 top-1/2 -translate-y-1/2 size-5 text-gray-500"
+            />
           </div>
 
           <div>
             <button
               type="submit"
-              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 outline-offset-2 focus:outline-2 focus:outline-blue-700"
             >
               Apply Filters
             </button>
@@ -363,11 +371,17 @@ const AdminProductList: React.FC = () => {
         <div className="mt-8 mb-4">
           {/* Info display */}
           <div className="text-sm text-gray-500 mb-3 text-center">
-            Showing <span className="font-medium text-gray-700">{(currentPage - 1) * resultsPerPage + 1}</span> to{" "}
-            <span className="font-medium text-gray-700">{Math.min(currentPage * resultsPerPage, productsCount)}</span> of{" "}
-            <span className="font-medium text-gray-700">{productsCount}</span> products
+            Showing{" "}
+            <span className="font-medium text-gray-700">
+              {(currentPage - 1) * resultsPerPage + 1}
+            </span>{" "}
+            to{" "}
+            <span className="font-medium text-gray-700">
+              {Math.min(currentPage * resultsPerPage, productsCount)}
+            </span>{" "}
+            of <span className="font-medium text-gray-700">{productsCount}</span> products
           </div>
-          
+
           {/* Pagination controls */}
           <div className="flex justify-center">
             <nav className="flex items-center rounded-lg overflow-hidden shadow">
@@ -382,12 +396,25 @@ const AdminProductList: React.FC = () => {
                 } border-r border-gray-200 transition-colors duration-150`}
                 aria-label="First page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
-                  <path fillRule="evenodd" d="M9.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M9.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
-              
+
               {/* Previous */}
               <button
                 onClick={() => handlePageChange(currentPage - 1)}
@@ -399,8 +426,17 @@ const AdminProductList: React.FC = () => {
                 } border-r border-gray-200 transition-colors duration-150`}
                 aria-label="Previous page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
 
@@ -428,7 +464,7 @@ const AdminProductList: React.FC = () => {
                 }
                 return null;
               })}
-              
+
               {/* Next */}
               <button
                 onClick={() => handlePageChange(currentPage + 1)}
@@ -440,11 +476,20 @@ const AdminProductList: React.FC = () => {
                 } border-r border-gray-200 transition-colors duration-150`}
                 aria-label="Next page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
-              
+
               {/* Last page */}
               <button
                 onClick={() => handlePageChange(totalPages)}
@@ -456,9 +501,22 @@ const AdminProductList: React.FC = () => {
                 } transition-colors duration-150`}
                 aria-label="Last page"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.293 15.707a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L8.586 10 4.293 14.293a1 1 0 000 1.414z" clipRule="evenodd" />
-                  <path fillRule="evenodd" d="M10.293 15.707a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L14.586 10l-4.293 4.293a1 1 0 000 1.414z" clipRule="evenodd" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4.293 15.707a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L8.586 10 4.293 14.293a1 1 0 000 1.414z"
+                    clipRule="evenodd"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M10.293 15.707a1 1 0 001.414 0l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L14.586 10l-4.293 4.293a1 1 0 000 1.414z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </button>
             </nav>

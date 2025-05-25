@@ -243,7 +243,7 @@ const ProductListPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section based on selected category */}
-      <div className="relative h-[450px]">
+      <div className="relative h-[450px] z-[0]">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${categoryInfo.banner})` }}
