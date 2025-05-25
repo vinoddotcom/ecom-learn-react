@@ -46,7 +46,7 @@ const OrderService = {
   /**
    * Get order by ID
    */
-  getOrderById: (orderId: string) => apiHelper.get<OrderResponse>(`/orders/${orderId}`),
+  getOrderById: (orderId: string) => apiHelper.get<OrderResponse>(`/order/${orderId}`),
 
     /**
    * Get order by ID (admin only)
@@ -56,7 +56,7 @@ const OrderService = {
       /**
    * Get order by ID (admin only)
    */
-  updateAdminOrderById: (orderId: string) => apiHelper.put<AdminOrderResponse>(`admin/orders/${orderId}`),
+  updateAdminOrderById: (orderId: string) => apiHelper.put<AdminOrderResponse>(`admin/order/${orderId}`),
 
   /**
    * Get all orders for the current user

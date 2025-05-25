@@ -9,6 +9,8 @@ import ProductListPage from "./components/products/ProductListPage";
 import ProductDetailPage from "./components/products/ProductDetailPage";
 import CartPage from "./components/cart/CartPage";
 import CheckoutPage from "./components/cart/CheckoutPage";
+import OrdersPage from "./components/orders/OrdersPage";
+import OrderDetailPage from "./components/orders/OrderDetailPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import { getUserProfile } from "./store/slices/authSlice";
@@ -70,7 +72,15 @@ function App() {
               path={RoutePath.ORDERS}
               element={
                 <RouteGuard routeType={RouteType.PROTECTED}>
-                  <div className="mt-5 text-center">Orders Page (Protected)</div>
+                  <OrdersPage />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path={`${RoutePath.ORDERS}/:id`}
+              element={
+                <RouteGuard routeType={RouteType.PROTECTED}>
+                  <OrderDetailPage />
                 </RouteGuard>
               }
             />
