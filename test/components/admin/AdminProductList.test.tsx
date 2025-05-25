@@ -95,8 +95,14 @@ describe("AdminProductList Component", () => {
     expect(screen.getByText("Test Product 2")).toBeDefined();
     expect(screen.getByText("$99.99")).toBeDefined();
     expect(screen.getByText("$149.99")).toBeDefined();
-    expect(screen.getByText("Electronics")).toBeDefined();
-    expect(screen.getByText("Clothing")).toBeDefined();
+
+    // Fix: Use getAllByText instead of getByText for texts that appear multiple times
+    const electronicsElements = screen.getAllByText("Electronics");
+    const clothingElements = screen.getAllByText("Clothing");
+
+    // Verify that at least one element with each category exists
+    expect(electronicsElements.length).toBeGreaterThan(0);
+    expect(clothingElements.length).toBeGreaterThan(0);
   });
 
   // Test for error state
@@ -148,13 +154,26 @@ describe("AdminProductList Component", () => {
   // Test for delete product functionality
   it("should delete a product when delete button is clicked", async () => {
     const user = userEvent.setup();
-    vi.mocked(ProductService.getProducts).mockResolvedValue({
+
+    // First call to getProducts returns both products
+    vi.mocked(ProductService.getProducts).mockResolvedValueOnce({
+      success: true,
       products: mockProducts,
+      productsCount: mockProducts.length,
     } as any);
+
+    // Setup deleteProduct mock
     vi.mocked(ProductService.deleteProduct).mockResolvedValue({
       success: true,
       message: "Product deleted",
     });
+
+    // After deletion, the second call to getProducts should return only the remaining product
+    vi.mocked(ProductService.getProducts).mockResolvedValueOnce({
+      success: true,
+      products: [mockProducts[1]], // Only the second product remains
+      productsCount: 1,
+    } as any);
 
     // Mock window.confirm to always return true
     vi.spyOn(window, "confirm").mockImplementation(() => true);
@@ -171,27 +190,20 @@ describe("AdminProductList Component", () => {
 
     // Wait for the products to be displayed
     await waitFor(() => {
-      expect(screen.getByText("Test Product 1")).toBeDefined();
+      expect(screen.getByText("Test Product 1")).toBeInTheDocument();
     });
 
     // Find and click the delete button for the first product
-    const deleteButtons = screen.getAllByRole("button");
-    const deleteButton = deleteButtons.find(
-      button => button.getAttribute("aria-label") === "Delete product"
-    );
+    const deleteButtons = screen.getAllByRole("button", { name: /delete product/i });
+    await user.click(deleteButtons[0]);
 
-    if (deleteButton) {
-      await user.click(deleteButton);
+    // Verify that the delete API was called with the correct product ID
+    expect(ProductService.deleteProduct).toHaveBeenCalledWith("1");
 
-      // Verify that the delete API was called with the correct product ID
-      expect(ProductService.deleteProduct).toHaveBeenCalledWith("1");
-
-      // Verify that the product is removed from the list
-      await waitFor(() => {
-        expect(screen.queryByText("Test Product 1")).toBeNull();
-      });
-    } else {
-      throw new Error("Delete button not found");
-    }
+    // Verify that the product list is refreshed after deletion
+    await waitFor(() => {
+      expect(screen.queryByText("Test Product 1")).not.toBeInTheDocument();
+      expect(screen.getByText("Test Product 2")).toBeInTheDocument();
+    });
   });
 });
