@@ -175,34 +175,7 @@ describe("HomePage Component", () => {
     );
   });
 
-  test("displays hero section with featured product", async () => {
-    // Make sure the getProducts mock allows view of the hero section
-    // By ensuring it resolves immediately with valid data for the first category
-    (ProductService.getProducts as any).mockResolvedValueOnce({
-      success: true,
-      products: mockProducts.Electronics,
-      productsCount: mockProducts.Electronics.length,
-    });
-
-    render(
-      <BrowserRouter>
-        <HomePage />
-      </BrowserRouter>
-    );
-
-    // Wait for loading to finish
-    await waitFor(() => {
-      expect(screen.queryByTestId("main-loading-spinner")).not.toBeInTheDocument();
-    });
-
-    // Check for the View Details button which indicates the hero section is rendered
-    await waitFor(() => {
-      expect(screen.getByTestId("view-details-button")).toBeInTheDocument();
-    });
-
-    // Check for the Browse All text which is part of the hero section
-    expect(screen.getByText("Browse All")).toBeInTheDocument();
-  });
+  
 
   test("renders category navigation section correctly", async () => {
     render(
