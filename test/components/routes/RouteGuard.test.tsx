@@ -59,7 +59,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.PUBLIC, {
       isAuthenticated: false,
       loading: false,
-      user: null
+      user: null,
     });
 
     expect(screen.getByText("Protected Content")).toBeInTheDocument();
@@ -71,7 +71,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.PROTECTED, {
       isAuthenticated: false,
       loading: true,
-      user: null
+      user: null,
     });
 
     expect(screen.getByText("Verifying authentication...")).toBeInTheDocument();
@@ -91,7 +91,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.ADMIN, {
       isAuthenticated: true,
       loading: true,
-      user: { role: "admin" }
+      user: { role: "admin" },
     });
 
     expect(screen.getByText("Verifying admin access...")).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.ADMIN, {
       isAuthenticated: true,
       loading: false,
-      user: { role: "customer" }
+      user: { role: "customer" },
     });
 
     expect(screen.getByText("Home Page")).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.PROTECTED, {
       isAuthenticated: true,
       loading: false,
-      user: { role: "customer" }
+      user: { role: "customer" },
     });
 
     expect(screen.getByText("Protected Content")).toBeInTheDocument();
@@ -121,7 +121,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.ADMIN, {
       isAuthenticated: true,
       loading: false,
-      user: { role: "admin" }
+      user: { role: "admin" },
     });
 
     expect(screen.getByText("Protected Content")).toBeInTheDocument();
@@ -132,7 +132,7 @@ describe("RouteGuard Component", () => {
     renderRouteGuard(RouteType.PROTECTED, {
       isAuthenticated: false,
       loading: false,
-      user: null
+      user: null,
     });
 
     // This test is a bit tricky because authCheckAttempted is internal state

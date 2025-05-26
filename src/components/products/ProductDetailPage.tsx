@@ -126,7 +126,6 @@ const ProductDetailPage: React.FC = () => {
     setQuantity(newQuantity);
   };
 
-
   // Handle submit review
   const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -168,6 +167,10 @@ const ProductDetailPage: React.FC = () => {
     } catch (err: unknown) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
       console.error("Failed to submit review:", errorMessage);
+
+      // Reset the form on error as well
+      setRating(5);
+      setComment("");
       setSubmittingReview(false);
 
       // Show error message
@@ -178,7 +181,12 @@ const ProductDetailPage: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+        <div
+          role="status"
+          className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
       </div>
     );
   }

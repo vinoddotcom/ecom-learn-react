@@ -54,15 +54,24 @@ const HomePage: React.FC = () => {
       {/* Hero Section */}
       {loading ? (
         <div className="w-full h-96 flex items-center justify-center bg-gray-100">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
+          <div
+            className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"
+            data-testid="main-loading-spinner"
+            role="status"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
         </div>
       ) : error ? (
         <div className="w-full h-96 flex items-center justify-center bg-gray-100">
           <div className="text-center">
-            <p className="text-red-500 text-xl">{error}</p>
+            <p className="text-red-500 text-xl" data-testid="error-message">
+              {error}
+            </p>
             <button
               onClick={() => window.location.reload()}
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              data-testid="try-again-button"
             >
               Try Again
             </button>
@@ -88,6 +97,7 @@ const HomePage: React.FC = () => {
                   <Link
                     to={`/products/${heroProduct._id}`}
                     className="px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors"
+                    data-testid="view-details-button"
                   >
                     View Details
                   </Link>
@@ -178,7 +188,12 @@ const HomePage: React.FC = () => {
 
             {loading ? (
               <div className="h-64 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+                <div
+                  className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"
+                  aria-label={`Loading ${category} products`}
+                >
+                  <span className="sr-only">Loading...</span>
+                </div>
               </div>
             ) : featuredProducts[category]?.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
