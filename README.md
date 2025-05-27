@@ -145,7 +145,18 @@ npm run test:run
 npm run coverage
 ```
 
-## Docker Deployment
+## CI/CD Pipeline
+
+This project includes a CI/CD pipeline using GitHub Actions that:
+
+1. Runs tests
+2. Performs type checking
+3. Builds the application
+4. Deploys to an AWS S3 bucket (if all previous steps pass)
+
+For detailed setup instructions for the S3 deployment, see [S3 Deployment Setup Guide](./docs/s3-deployment-setup.md).
+
+    ...reactDom.configs.recommended.rules,
 
 The project includes Docker configuration for easy deployment:
 
