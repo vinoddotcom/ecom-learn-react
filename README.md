@@ -145,18 +145,27 @@ npm run test:run
 npm run coverage
 ```
 
-## CI/CD Pipeline
+## Deployment
 
-This project includes a CI/CD pipeline using GitHub Actions that:
+This project uses a CI/CD pipeline with GitHub Actions for automated builds and deployments.
 
-1. Runs tests
-2. Performs type checking
-3. Builds the application
-4. Deploys to an AWS S3 bucket (if all previous steps pass)
+### Infrastructure
 
-For detailed setup instructions for the S3 deployment, see [S3 Deployment Setup Guide](./docs/s3-deployment-setup.md).
+- **Amazon S3**: Used for hosting the static files of the React application
+- **Amazon CloudFront**: Serves as a CDN to deliver the application with low latency
 
-    ...reactDom.configs.recommended.rules,
+### CI/CD Pipeline
+
+The project includes a CI/CD workflow (see `.github/workflows/ci-cd.yaml`) that automatically:
+
+1. Builds the application
+2. Runs tests
+3. Deploys to S3
+4. Invalidates the CloudFront cache for immediate updates
+
+To make changes to the deployment process, modify the workflow file in the repository.
+
+## Docker Deployment
 
 The project includes Docker configuration for easy deployment:
 
