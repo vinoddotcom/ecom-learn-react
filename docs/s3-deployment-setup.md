@@ -101,7 +101,18 @@ Add the following secrets to your GitHub repository:
 - `AWS_SECRET_ACCESS_KEY`: The Secret Access Key of the IAM user
 - `AWS_REGION`: The region where your S3 bucket is located (e.g., `us-east-1`)
 - `S3_BUCKET`: The name of your S3 bucket
-- `CLOUDFRONT_DISTRIBUTION_ID`: (Optional) Your CloudFront distribution ID if you're using CloudFront
+- `CLOUDFRONT_DISTRIBUTION_ID`: Your CloudFront distribution ID (required for cache invalidation)
+
+## CI/CD Workflow
+
+The project uses a GitHub Actions workflow defined in `.github/workflows/ci-cd.yaml`. This workflow:
+
+1. Builds the React application
+2. Runs any tests
+3. Deploys the build artifacts to the configured S3 bucket
+4. Creates a CloudFront invalidation to ensure users get the latest version immediately
+
+The workflow runs automatically when changes are pushed to the main branch. You can also manually trigger the workflow from the Actions tab in GitHub.
 
 ## Testing The Pipeline
 
@@ -119,3 +130,12 @@ If you've set up the S3 bucket for static website hosting, you can access your a
 Or if you're using CloudFront:
 
 `https://YOUR-CLOUDFRONT-DOMAIN.cloudfront.net`
+
+## Troubleshooting
+
+If you encounter issues with the deployment:
+
+1. Check the GitHub Actions logs for detailed error messages
+2. Verify that all required secrets are correctly set in the repository
+3. Ensure the IAM user has sufficient permissions for both S3 and CloudFront operations
+4. Confirm your CloudFront distribution is properly linked to the S3 bucket
