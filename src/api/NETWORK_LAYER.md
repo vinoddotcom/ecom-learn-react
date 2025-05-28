@@ -23,7 +23,7 @@ This project uses Axios to handle API communications. The network layer is desig
 
 The API layer uses the following environment variables:
 
-- `VITE_API_BASE_URL`: Base URL for the API (default: http://localhost:5000/api/v1)
+- `REACT_APP_API_BASE_URL`: Base URL for the API (default: https://api.vinod.digital/api/v1)
 
 ## Error Handling
 

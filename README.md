@@ -81,7 +81,7 @@ Follow these steps to set up the project locally:
 Create a `.env` file in the project root with the following variables:
 
 ```
-REACT_APP_API_BASE_URL=http://localhost:5000/api/v1
+REACT_APP_API_BASE_URL=https://api.vinod.digital/api/v1
 VITE_USE_MOCK_API=true  # Set to 'false' to use real API
 ```
 

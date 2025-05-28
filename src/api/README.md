@@ -156,7 +156,7 @@ const getCartTotal = () => {
 The API base URL can be configured via environment variables:
 
 ```
-VITE_API_BASE_URL=http://your-api-url/api/v1
+REACT_APP_API_BASE_URL=http://your-api-url/api/v1
 ```
 
-If not specified, it defaults to `http://localhost:5000/api/v1`.
+If not specified, it defaults to `https://api.vinod.digital/api/v1`.
