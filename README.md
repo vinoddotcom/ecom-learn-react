@@ -81,11 +81,11 @@ Follow these steps to set up the project locally:
 Create a `.env` file in the project root with the following variables:
 
 ```
-VITE_API_BASE_URL=http://localhost:5000/api/v1
+REACT_APP_API_BASE_URL=http://localhost:5000/api/v1
 VITE_USE_MOCK_API=true  # Set to 'false' to use real API
 ```
 
-- `VITE_API_BASE_URL`: The base URL for your API endpoints
+- `REACT_APP_API_BASE_URL`: The base URL for your API endpoints
 - `VITE_USE_MOCK_API`: When set to `true`, the application will use mock data instead of making actual API calls
 
 ## Available Scripts

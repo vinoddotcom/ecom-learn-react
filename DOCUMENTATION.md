@@ -104,7 +104,7 @@ src/
    Create a `.env` file in the project root with:
 
    ```
-   VITE_API_BASE_URL=http://localhost:5000/api/v1
+   REACT_APP_API_BASE_URL=http://localhost:5000/api/v1
    VITE_USE_MOCK_API=true  # Set to 'false' to use real API
    ```
 

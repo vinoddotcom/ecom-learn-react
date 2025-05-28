@@ -6,7 +6,7 @@ async function generateApiTypes() {
     await generateApi({
       name: "api.types.ts",
       output: path.resolve(process.cwd(), "./src/types/generated"),
-      url: "http://localhost:5000/api/v1/swagger.json", // URL to your Swagger/OpenAPI docs
+      url: "https://api.vinod.digital/api/v1/swagger.json", // URL to your Swagger/OpenAPI docs
       generateClient: false, // We only want types, not the client
       generateRouteTypes: true,
       defaultResponseAsSuccess: false,

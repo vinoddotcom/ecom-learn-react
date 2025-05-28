@@ -1,7 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse, AxiosError } from "axios";
 
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api/v1";
+const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL || "http://api.vinod.digital/api/v1";
 
 // Create axios instance with default configuration
 const axiosInstance = axios.create({
