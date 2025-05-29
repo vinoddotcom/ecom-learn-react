@@ -39,11 +39,17 @@ export default function SignIn() {
   };
 
   // Redirect after successful login
+  const { user } = useAppSelector(state => state.auth);
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      // If user is admin, redirect to admin dashboard
+      if (user?.role === "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/");
+      }
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, user?.role]);
 
   return (
     <>

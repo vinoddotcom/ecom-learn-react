@@ -524,6 +524,12 @@ export default function Header() {
                           {user?.role === "admin" && (
                             <>
                               <Link
+                                to="/admin/dashboard"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                Admin Dashboard
+                              </Link>
+                              <Link
                                 to="/admin/products"
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                               >
@@ -534,6 +540,12 @@ export default function Header() {
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                               >
                                 Admin Orders
+                              </Link>
+                              <Link
+                                to="/admin/users"
+                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              >
+                                Admin Users
                               </Link>
                             </>
                           )}

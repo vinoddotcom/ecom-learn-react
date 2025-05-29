@@ -20,11 +20,13 @@ export const RoutePath = {
   CHECKOUT: "/checkout",
   PRODUCTS: "/products",
   PRODUCT_DETAIL: "/products/:id",
+  ADMIN_DASHBOARD: "/admin/dashboard",
   ADMIN_PRODUCTS: "/admin/products",
   ADMIN_PRODUCTS_NEW: "/admin/products/new",
   ADMIN_PRODUCTS_EDIT: "/admin/products/edit/:id",
   ADMIN_ORDERS: "/admin/orders",
   ADMIN_ORDER_DETAIL: "/admin/orders/:id",
+  ADMIN_USERS: "/admin/users", // New route for users management
 };
 
 // Simple route configuration without React components
@@ -77,6 +79,10 @@ export const routes: RouteConfig[] = [
     type: RouteType.PROTECTED,
   },
   {
+    path: RoutePath.ADMIN_DASHBOARD,
+    type: RouteType.ADMIN,
+  },
+  {
     path: RoutePath.ADMIN_PRODUCTS,
     type: RouteType.ADMIN,
   },
@@ -94,6 +100,10 @@ export const routes: RouteConfig[] = [
   },
   {
     path: RoutePath.ADMIN_ORDER_DETAIL,
+    type: RouteType.ADMIN,
+  },
+  {
+    path: RoutePath.ADMIN_USERS,
     type: RouteType.ADMIN,
   },
 ];

@@ -11,10 +11,12 @@ import CartPage from "./components/cart/CartPage";
 import CheckoutPage from "./components/cart/CheckoutPage";
 import OrdersPage from "./components/orders/OrdersPage";
 import OrderDetailPage from "./components/orders/OrderDetailPage";
+import AdminDashboardPage from "./components/admin/AdminDashboardPage";
 import AdminProductList from "./components/admin/AdminProductList";
 import AdminProductForm from "./components/admin/AdminProductForm";
 import AdminOrdersPage from "./components/admin/AdminOrdersPage";
 import AdminOrderDetailPage from "./components/admin/AdminOrderDetailPage";
+import AdminUsersList from "./components/admin/AdminUsersList";
 import { getUserProfile } from "./store/slices/authSlice";
 import { useAppDispatch } from "./store/hooks";
 import RouteGuard from "./routes/RouteGuard";
@@ -123,9 +125,17 @@ function App() {
 
             {/* Admin routes - check both auth and admin role */}
             <Route
+              path={RoutePath.ADMIN_DASHBOARD}
+              element={
+                <RouteGuard routeType={RouteType.ADMIN}>
+                  <AdminDashboardPage />
+                </RouteGuard>
+              }
+            />
+            <Route
               path={RoutePath.ADMIN_PRODUCTS}
               element={
-                <RouteGuard routeType={RouteType.PUBLIC}>
+                <RouteGuard routeType={RouteType.ADMIN}>
                   <AdminProductList />
                 </RouteGuard>
               }
@@ -159,6 +169,14 @@ function App() {
               element={
                 <RouteGuard routeType={RouteType.ADMIN}>
                   <AdminOrderDetailPage />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path={RoutePath.ADMIN_USERS}
+              element={
+                <RouteGuard routeType={RouteType.ADMIN}>
+                  <AdminUsersList />
                 </RouteGuard>
               }
             />
