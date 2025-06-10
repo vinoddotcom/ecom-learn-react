@@ -19,6 +19,8 @@ This project is a React-based e-commerce application with TypeScript, built usin
 - [Setting Up Your Local Development Environment](#setting-up-your-local-development-environment)
 - [Environment Variables](#environment-variables)
 - [Available Scripts](#available-scripts)
+- [Deployment](#deployment)
+- [Infrastructure](#infrastructure)
 - [Project Structure](#project-structure)
 - [API Layer](#api-layer)
 - [Testing](#testing)
@@ -147,23 +149,47 @@ npm run coverage
 
 ## Deployment
 
-This project uses a CI/CD pipeline with GitHub Actions for automated builds and deployments.
+This project uses a CI/CD pipeline with GitHub Actions for automated builds and deployments to multiple environments.
 
 ### Infrastructure
 
-- **Amazon S3**: Used for hosting the static files of the React application
+The infrastructure is managed with Terraform and includes:
+
+- **Amazon S3**: For hosting the static files of the React application
 - **Amazon CloudFront**: Serves as a CDN to deliver the application with low latency
+- **AWS Certificate Manager**: Provides SSL certificates for secure HTTPS access
+- **Route 53**: Manages DNS records for custom domain configuration
+- **GitHub OIDC**: Secure authentication between GitHub Actions and AWS
+
+For detailed infrastructure documentation, see [terraform/README.md](./terraform/README.md).
+
+### Multi-Environment Setup
+
+The project supports multiple deployment environments:
+
+| Environment | Git Branch   | Domain            |
+| ----------- | ------------ | ----------------- |
+| Development | `main`       | dev.vinod.digital |
+| Production  | `production` | vinod.digital     |
+
+Each environment has its own:
+
+- S3 bucket
+- CloudFront distribution
+- IAM permissions
+- Configuration values
 
 ### CI/CD Pipeline
 
-The project includes a CI/CD workflow (see `.github/workflows/ci-cd.yaml`) that automatically:
+The project includes a CI/CD workflow that automatically:
 
-1. Builds the application
-2. Runs tests
-3. Deploys to S3
-4. Invalidates the CloudFront cache for immediate updates
+1. Identifies the target environment based on the Git branch
+2. Builds the application with environment-specific configuration
+3. Runs tests
+4. Deploys to the appropriate S3 bucket
+5. Invalidates the CloudFront cache for immediate updates
 
-To make changes to the deployment process, modify the workflow file in the repository.
+For more information about the CI/CD workflow, see [.github/workflows/WORKFLOW_DOCUMENTATION.md](./.github/workflows/WORKFLOW_DOCUMENTATION.md).
 
 ## Docker Deployment
 

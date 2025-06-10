@@ -23,3 +23,34 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+# Terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars.json
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
+# Exclude all .tfvars files except the environment ones
+*.tfvars
+!terraform/environments/*/terraform.tfvars
+
+# Local .terraform directories
+**/.terraform/
+
+# Sensitive information
+.env
+.env.*
+.envrc
+*.pem
+*.key
+credentials.json
+auth.json
