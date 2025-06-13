@@ -78,12 +78,14 @@ module "route53" {
 module "s3_bucket_policy" {
   source = "./modules/s3"
 
-  depends_on = [module.s3_bucket, module.cloudfront]
+  depends_on = [module.s3_bucket, module.cloudfront, module.github_oidc]
 
   bucket_name                = var.domain_name
   region                     = var.aws_region
+  create_bucket              = false  # Don't create the bucket again, just update the policy
   cloudfront_distribution_arn = module.cloudfront.distribution_arn
   cloudfront_oac_id          = module.cloudfront.oac_id
+  github_actions_role_arn    = module.github_oidc.role_arn
 }
 
 # Module for GitHub OIDC IAM Role
@@ -96,4 +98,5 @@ module "github_oidc" {
   github_org             = var.github_org
   github_repo            = var.github_repo
   role_name              = var.github_role_name
+  create_oidc_provider   = false  # Set to false to use the existing provider
 }

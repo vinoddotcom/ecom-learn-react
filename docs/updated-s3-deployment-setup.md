@@ -7,22 +7,26 @@ This document outlines the AWS infrastructure setup managed by Terraform for our
 Our AWS infrastructure includes:
 
 1. **S3 Buckets**
+
    - Static website content storage
    - Terraform state management
    - Public access blocked for security
 
 2. **CloudFront Distribution**
+
    - Content delivery network for global low-latency access
    - HTTPS with TLS 1.2
    - Custom domain support
    - URL normalization for SPA routing
 
 3. **ACM Certificates**
+
    - Automatic SSL certificate provisioning
    - DNS validation
    - Support for apex and wildcard domains
 
 4. **Route 53 DNS**
+
    - DNS management for custom domains
    - A records for apex and www domains
 
@@ -36,6 +40,7 @@ Our AWS infrastructure includes:
 Our Terraform configuration uses secure remote state management with:
 
 - **S3 Bucket**: `terraform-state-vinod-digital`
+
   - Versioning enabled for state history
   - Server-side encryption with AES-256
   - Public access blocked for security
@@ -49,6 +54,7 @@ Our Terraform configuration uses secure remote state management with:
 Our infrastructure supports multiple environments through Terraform workspaces:
 
 - **Development**:
+
   - Workspace: `dev`
   - State path: `env:/dev/terraform/state`
   - Domain: `dev.vinod.digital`
@@ -76,6 +82,7 @@ cd terraform
 ```
 
 This script creates:
+
 - S3 bucket for state storage with encryption and versioning
 - DynamoDB table for state locking
 
@@ -88,6 +95,7 @@ After bootstrapping, apply the Terraform configuration:
 ```
 
 This script will:
+
 1. Detect your current Git branch
 2. Select the appropriate workspace (dev or prod)
 3. Initialize Terraform with the correct backend
@@ -98,6 +106,7 @@ This script will:
 After applying Terraform, update your GitHub repository with the outputs:
 
 1. Create environments in GitHub repository settings:
+
    - Development
    - Production
 

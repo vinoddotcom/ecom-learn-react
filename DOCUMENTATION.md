@@ -202,6 +202,27 @@ The application uses Vitest and React Testing Library for testing:
 
 ## Deployment
 
+### AWS Infrastructure and CI/CD
+
+The application is deployed to AWS using a comprehensive infrastructure setup:
+
+- **Amazon S3** for static file hosting
+- **Amazon CloudFront** for content delivery and edge caching
+- **AWS Certificate Manager** for SSL certificates
+- **Amazon Route 53** for domain management
+- **GitHub Actions** for CI/CD pipeline
+- **GitHub OIDC** for secure AWS authentication
+- **Terraform** for infrastructure as code
+
+Detailed documentation is available in:
+
+- [AWS Infrastructure Setup](./docs/updated-s3-deployment-setup.md)
+- [Deployment Guide](./docs/updated-deployment.md)
+- [Multi-Environment CI/CD](./docs/updated-ci-cd-environments.md)
+- [GitHub OIDC Authentication](./docs/github-oidc-auth.md)
+- [Terraform State Management](./docs/terraform-state-management-guide.md)
+- [Git Branch to Terraform Workspace Binding](./docs/git-terraform-workspace-binding.md)
+
 ### Build Process
 
 1. Build the application for production:

@@ -159,6 +159,18 @@ The infrastructure is managed with Terraform and includes:
 - **Amazon CloudFront**: Serves as a CDN to deliver the application with low latency
 - **AWS Certificate Manager**: Provides SSL certificates for secure HTTPS access
 - **Route 53**: Manages DNS records for custom domain configuration
+- **GitHub OIDC**: Provides secure authentication to AWS without storing credentials
+
+### Documentation
+
+Detailed documentation is available for various aspects of deployment:
+
+- [Deployment Guide](./docs/deployment.md): Overview of the deployment process
+- [CI/CD Environments](./docs/ci-cd-environments.md): Details on multi-environment setup
+- [S3 Deployment Setup](./docs/s3-deployment-setup.md): AWS infrastructure setup
+- [GitHub OIDC Authentication](./docs/github-oidc-auth.md): Secure AWS authentication
+- [Terraform State Management](./docs/terraform-state-management-guide.md): Managing Terraform state
+- [Git Branch to Terraform Workspace Binding](./docs/git-terraform-workspace-binding.md): How Git branches map to environments
 - **GitHub OIDC**: Secure authentication between GitHub Actions and AWS
 
 For detailed infrastructure documentation, see [terraform/README.md](./terraform/README.md).

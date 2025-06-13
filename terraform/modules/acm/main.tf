@@ -1,3 +1,13 @@
+# Define required providers
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 4.0.0"
+    }
+  }
+}
+
 # Request an ACM certificate
 resource "aws_acm_certificate" "cert" {
   domain_name               = var.domain_name

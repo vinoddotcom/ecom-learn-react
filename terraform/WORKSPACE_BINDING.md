@@ -98,27 +98,21 @@ ENVIRONMENT="development"
 fi
 ```
 
-## Manual Workspace Management
+## Workspace Management with apply_terraform.sh
 
-To manually switch between workspaces:
-
-1. For development environment:
-
-   ```bash
-   ./use_dev_workspace.sh
-   ```
-
-2. For production environment:
-   ```bash
-   ./use_prod_workspace.sh
-   ```
-
-## Automated Deployment
-
-To apply Terraform changes based on the current Git branch:
+Our infrastructure uses a streamlined approach with a single script that automatically detects your Git branch and applies the appropriate workspace:
 
 ```bash
 ./apply_terraform.sh
+```
+
+This script:
+
+1. Detects your current Git branch (`main` or `production`)
+2. Selects the appropriate workspace (`dev` or `prod`)
+3. Initializes Terraform with the correct backend configuration
+4. Plans and applies the changes after confirmation
+
 ```
 
 This script:
@@ -147,3 +141,4 @@ Where possible, resources are named with environment-specific prefixes or suffix
 
 - Development: `dev-vinod-digital-*` or `*-dev`
 - Production: `vinod-digital-*` (no suffix for production)
+```

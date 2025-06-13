@@ -28,13 +28,3 @@ output "iam_role_arn" {
   value       = module.github_oidc.role_arn
 }
 
-# State Management Outputs
-output "terraform_state_bucket" {
-  description = "The name of the S3 bucket used for Terraform state"
-  value       = aws_s3_bucket.terraform_state.bucket
-}
-
-output "terraform_locks_table" {
-  description = "The name of the DynamoDB table used for Terraform state locking"
-  value       = aws_dynamodb_table.terraform_locks.name
-}

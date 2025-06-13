@@ -28,3 +28,9 @@ variable "role_name" {
   type        = string
   default     = "github-actions-manage-s3-cloudfront"
 }
+
+variable "create_oidc_provider" {
+  description = "Whether to create the OIDC provider (set to false if it already exists)"
+  type        = bool
+  default     = false
+}

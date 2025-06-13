@@ -1,5 +1,0 @@
----
-
-# Inventory file for local execution
-
-localhost ansible_connection=local

@@ -76,32 +76,34 @@ cd terraform
 ./bootstrap_state.sh
 ```
 
-### 2. Select Environment Based on Git Branch
+### 2. Apply Terraform Changes Based on Git Branch
 
-The environment (dev or prod) is automatically selected based on your current Git branch:
+The environment (dev or prod) is automatically selected based on your current Git branch using our streamlined approach:
 
 ```bash
+# This script handles workspace selection, planning, and applying changes
 ./apply_terraform.sh
 ```
 
-Or manually select an environment:
+This single script will:
+
+1. Detect whether you're on `main` (dev) or `production` branch
+2. Select the appropriate Terraform workspace
+3. Run plan and show you the changes
+4. Apply the changes after your confirmation
+
+For manual operations, you can still use the standard Terraform commands with the appropriate workspace and variables:
 
 ```bash
-# For development environment
-./use_dev_workspace.sh
+# Manually initialize with the correct backend
+terraform init -reconfigure -backend-config=./environments/dev/backend.hcl
 
-# For production environment
-./use_prod_workspace.sh
-```
+# Select workspace
+terraform workspace select dev
 
-### 3. Plan and Apply Configuration
-
-After selecting the workspace, plan and apply the Terraform configuration:
-
-```bash
-# If using apply_terraform.sh, this is handled automatically
-terraform plan -var-file=environments/dev/terraform.tfvars
-terraform apply
+# Plan and apply with correct variables
+terraform plan -var-file=environments/dev/terraform.tfvars -out=tfplan
+terraform apply tfplan
 hosted_zone_id = "Z1234567890ABC"  # Your Route 53 Hosted Zone ID
 github_org     = "vinoddotcom"      # Your GitHub organization
 github_repo    = "ecom-learn-react" # Your GitHub repository name
